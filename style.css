@@ -1,5 +1,5 @@
 /* =========================================
-   BASFLIX — style.css (FIXED WHITE SCREEN)
+   BASFLIX — style.css (CLEANED + SEASON 3 HERO FIX)
 ========================================= */
 
 /* --- 1) FONTS & RESET --- */
@@ -104,7 +104,7 @@ nav ul li a:hover::after{ width:100%; }
 .poster-overlay i{ font-size: 40px; color: var(--red); }
 
 /* =========================================
-   SEASON 3: MOVIE CARD SLIDER (FIXED)
+   SEASON 3: MOVIE CARD SLIDER (BASE)
 ========================================= */
 .card-movie-wrapper {
   box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.5);
@@ -132,7 +132,7 @@ nav ul li a:hover::after{ width:100%; }
 
 /* NAVIGATION (FIXED: TRANSPARENT BG) */
 .card-movie-navigation {
-  background-color: transparent; /* ทำให้พื้นหลังใส จะได้เห็นรูปหนัง */
+  background-color: transparent;
   bottom: 0; height: 100%; overflow: hidden;
   position: absolute; right: 0; width: 100%;
   z-index: 50; 
@@ -151,22 +151,8 @@ nav ul li a:hover::after{ width:100%; }
 .card-movie-navigation__list li.is-active { height: 18px; width: 18px; background-color: var(--red); }
 .card-movie-navigation__list li:hover { background-color: #bbb; }
 
-/* PLAY BUTTON TRAILER */
-.card-movie-btn-play {
-  -webkit-appearance: none; background-color: transparent; border: none;
-  bottom: 0; color: #333; cursor: pointer; font-size: 14px; font-weight: bold;
-  line-height: 60px; margin: 0; outline: none; padding: 0;
-  position: absolute; right: 40px; transition: all 0.25s;
-  pointer-events: auto;
-}
-.card-movie-btn-play:before { content: 'Watch Trailer'; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
-.card-movie-btn-play:after {
-  content: ''; border-bottom: 6px solid transparent; border-left: 6px solid #333;
-  border-top: 6px solid transparent; height: 0; margin-right: 6px;
-  position: absolute; right: 100%; top: 50%; transform: translateY(-50%); width: 0;
-}
-.card-movie-btn-play.is-playing:before { content: 'Hide Trailer'; }
-.card-movie-btn-play.is-playing:after { transform: rotate(-90deg); margin-top: -6px; }
+/* Trailer button (hide if not used) */
+.card-movie-btn-play{ display:none; }
 
 /* MOVIE CARD */
 .card-movie {
@@ -176,7 +162,6 @@ nav ul li a:hover::after{ width:100%; }
 }
 .card-movie--active { opacity: 1; z-index: 25; }
 
-/* HOVER CHANGE COLOR */
 .card-movie-wrapper:hover .card-movie__title {
     color: var(--red);
     text-shadow: 2px 2px 0px #fff;
@@ -204,15 +189,6 @@ nav ul li a:hover::after{ width:100%; }
   background: rgba(0,0,0,0.7); color: #fff;
 }
 
-/* Video Player */
-.card-movie__player {
-  transition: all 0.5s ease-in-out; transform: translate(-50%, -50%);
-  height: 0; left: 50%; position: absolute; top: 50%; width: 0;
-  z-index: 20; background: black;
-}
-.card-movie--playing .card-movie__player { height: 100%; width: 100%; }
-.card-movie__player iframe { height: 100%; width: 100%; border: none; }
-
 /* Footer */
 .ending{ text-align:center; padding: 100px 0; background:#000; color: rgba(255,255,255,.5); border-top: 1px solid rgba(255,255,255,.12); }
 .contact-icons i{ font-size: 40px; margin: 0 20px; cursor:pointer; transition:.25s; }
@@ -229,12 +205,136 @@ nav ul li a:hover::after{ width:100%; }
   .chapter{ flex-direction:column-reverse; align-items:flex-start; }
   .chapter-thumb{ width:100%; }
   .header-text h1{ font-size:50px; }
-  .hobby-list { grid-template-columns: repeat(1, 1fr); }
-  
-  /* Responsive Movie Slider */
+
+  /* Responsive Movie Slider (base) */
   .card-movie-wrapper { height: 600px; }
   .card-movie-wrapper:hover .card-movie-carousel { bottom: 0; right: 0; width: 100%; height: 100%; }
   .card-movie-navigation { display: none; }
   .card-movie__content { top: 50px; left: 20px; }
   .card-movie__title { font-size: 36px; }
+}
+
+/* =========================================================
+   SEASON 3 — HERO MOVIE SLIDER (FINAL OVERRIDE)
+   (Only affects #season3)
+========================================================= */
+
+#season3{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;                 /* override .container padding */
+  height: 100vh !important;
+  min-height: 100vh !important;
+  position: relative !important;
+  display: block !important;
+}
+
+/* Title: safely under fixed navbar */
+
+
+/* =========================================
+   SEASON 3 (TITLE OUTSIDE #season3) — CLEAN
+========================================= */
+
+/* ทำให้หัวข้อ Season 3 ไม่โดน navbar ทับเวลาเลื่อนมา */
+#season3{
+  scroll-margin-top: var(--navH);
+  padding-top: var(--navH);   /* กัน nav fixed ทับด้านบน */
+  margin-top: -var(--navH);   /* ชดเชยไม่ให้เกิดช่องว่างเพิ่ม */
+}
+
+/* ทำให้ Season 3 เป็น full-bleed (แต่หัวข้ออยู่นอกแล้ว) */
+#season3.container{
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  /* เว้นบน-ล่างนิดให้สวย */
+  padding-bottom: 0 !important;
+}
+
+/* การ์ดให้เต็มจอ แต่หักพื้นที่ nav (เพราะหัวข้ออยู่นอก) */
+#season3 .card-movie-wrapper{
+  width: 100% !important;
+  max-width: none !important;
+
+  height: calc(100vh - var(--navH)) !important;
+  min-height: calc(100vh - var(--navH)) !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+/* ปิด shrink-on-hover ให้เป็น hero คงที่ */
+#season3 .card-movie-wrapper:hover .card-movie-carousel{
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* (ถ้าคุณยังใช้ overlay/blur hover จากก่อนหน้า ให้คงไว้ได้) */
+
+/* มือถือ */
+@media (max-width: 768px){
+  #season3 .card-movie-wrapper{
+    height: calc(100vh - var(--navH)) !important;
+    min-height: calc(100vh - var(--navH)) !important;
+  }
+}
+
+
+/* Add readability overlay */
+#season3 .card-movie::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.38) 45%,
+      rgba(0,0,0,0) 72%);
+  z-index: 1;
+}
+#season3 .card-movie{
+  background-size: cover;
+  background-position: center;
+}
+
+#season3 .card-movie__content,
+#season3 .card-movie__rating{
+  z-index: 2;
+}
+
+/* Movie text: below title area */
+#season3 .card-movie__content{
+  left: 5% !important;
+  top: clamp(180px, 22vh, 260px) !important;
+  max-width: 520px !important;
+}
+
+/* Dots above */
+#season3 .card-movie-navigation{
+  z-index: 130 !important;
+}
+
+/* Ensure trailer button hidden in season3 */
+#season3 .card-movie-btn-play{ display:none !important; }
+
+/* Mobile tune */
+@media (max-width: 768px){
+  #season3 .sub-title{
+    left: 16px !important;
+    top: calc(var(--navH) + 10px) !important;
+  }
+  #season3 .card-movie__content{
+    left: 16px !important;
+    right: 16px;
+    max-width: none !important;
+    top: clamp(190px, 24vh, 280px) !important;
+  }
+  #season3 .card-movie__title{ font-size: 34px !important; }
 }

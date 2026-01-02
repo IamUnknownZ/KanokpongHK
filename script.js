@@ -105,24 +105,31 @@ window.onYouTubeIframeAPIReady = function() {
     });
   }
 
-  // 2. Setup Movie Slider (Season 3)
-  if (typeof $ !== 'undefined') { // Check jQuery for slider
-      $('[data-trailer]').each(function(index) {
-          var id = $(this).data('trailer');
-          $(this).html('<iframe id="movie_player_' + index + '" src="https://www.youtube.com/embed/' + id + '?enablejsapi=1&showinfo=0&rel=0&controls=1" allowfullscreen></iframe>');
-          
-          var p = new YT.Player('movie_player_' + index, {
-              events: {
-                  'onStateChange': function(e) {
-                      if (e.data === YT.PlayerState.ENDED) {
-                          resetMoviePlayer();
-                      }
-                  }
-              }
-          });
-          moviePlayers.push(p);
-      });
-  }
+  /* =========================
+   SEASON 3: SIMPLE SLIDER (NO TRAILER)
+========================= */
+var currentMovie = 0;
+
+$(function () {
+  // Navigation Dots only
+  $('[data-navigation] li').on('click', function () {
+    var newIndex = $(this).index();
+    if (newIndex === currentMovie) return;
+
+    currentMovie = newIndex;
+
+    $('[data-navigation] li')
+      .removeClass('is-active')
+      .eq(newIndex)
+      .addClass('is-active');
+
+    $('.card-movie')
+      .removeClass('card-movie--active')
+      .eq(newIndex)
+      .addClass('card-movie--active');
+  });
+});
+
 }
 
 // --- Music Player Logic ---
@@ -258,4 +265,4 @@ $(function() {
             currentPlayer.stopVideo(); // Stop trailer
         }
     }
-});
+}); 
