@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="overflow: hidden;"> <div id="intro-animation" style="position:fixed; inset:0; background:black; display:flex; align-items:center; justify-content:center; z-index:999;">
+        <h1 class="netflix-logo-anim">PORTFOLIO</h1>
+    </div>
+
+    <div id="profile-gate" class="hidden" style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <h1 style="font-size: 3rem; margin-bottom: 30px;">Who's watching?</h1>
+        
+        <div style="display:flex; gap: 30px;">
+            <div onclick="enterSite()" style="text-align:center; cursor:pointer; opacity:0.7; transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" style="width:150px; border-radius:4px;">
+                <p style="margin-top:10px; color:grey;">1</p>
+            </div>
+            <div onclick="enterSite()" style="text-align:center; cursor:pointer; opacity:0.7; transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png" style="width:150px; border-radius:4px;">
+                <p style="margin-top:10px; color:grey;">2</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard" class="hidden" style="width:100%; height:100vh; background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80') center/cover;">
+        <div style="width:100%; height:100%; background: linear-gradient(to right, black, transparent); padding: 0 5%; display:flex; align-items:center;">
+            
+            <div style="max-width: 600px;">
+                <h1 style="font-size: 80px; font-weight: 800; line-height: 1;">BOY'S<br>STORY</h1>
+                <div style="margin: 20px 0; color: #aaa; font-weight: bold;">
+                    <span style="color:#46d369;">98% Match</span> &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; 1 Season
+                </div>
+                <p style="font-size: 18px; margin-bottom: 30px;">
+                    One student. One keyboard. An infinite amount of coffee. Watch the journey of how a simple design became a deployment masterpiece.
+                </p>
+                
+                <a href="story.html" onclick="playMovie(event)" style="text-decoration:none; background:white; color:black; padding: 15px 30px; font-size: 20px; font-weight:bold; border-radius: 4px; display:inline-flex; align-items:center; gap:10px; transition: 0.2s;">
+                <i class="fa-solid fa-play"></i> Play
+                </a>
+                
+                <button style="background:rgba(109, 109, 110, 0.7); color:white; border:none; padding: 15px 30px; font-size: 20px; font-weight:bold; border-radius: 4px; margin-left: 10px; cursor: pointer;">
+                    <i class="fa-solid fa-circle-info"></i> More Info
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
