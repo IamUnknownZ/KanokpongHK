@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BASFLIX - Welcome</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BASFLIX - Welcome</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body style="overflow: hidden; background: #141414;">
 
-    <div id="intro-animation" style="position:fixed; inset:0; background:black; display:flex; align-items:center; justify-content:center; z-index:999;">
-        <h1 class="netflix-logo-anim">BASFLIX</h1>
+<body class="index-body">
+  <!-- Intro Animation -->
+  <div id="intro-animation" class="intro">
+    <h1 class="netflix-logo-anim">BASFLIX</h1>
+  </div>
+
+  <!-- Profile Gate -->
+  <main id="profile-gate" class="hidden profile-gate">
+    <h1 class="profile-title">Who’s watching?</h1>
+
+    <div class="profiles">
+      <button class="profile-card" id="profileDev" type="button">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+          alt="The Dev"
+        />
+        <span>The Dev</span>
+      </button>
+
+      <button class="profile-card" id="profileTeacher" type="button">
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"
+          alt="The Teacher"
+        />
+        <span>The Teacher</span>
+      </button>
     </div>
+  </main>
 
-    <div id="profile-gate" class="hidden" style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <h1 style="font-size: 3rem; margin-bottom: 30px;">Who's watching?</h1>
-        
-        <div style="display:flex; gap: 30px;">
-            <div onclick="enterSite()" style="text-align:center; cursor:pointer; opacity:0.7; transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" style="width:150px; border-radius:4px;">
-                <p style="margin-top:10px; color:grey;">The Dev</p>
-            </div>
-            <div onclick="enterSite()" style="text-align:center; cursor:pointer; opacity:0.7; transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png" style="width:150px; border-radius:4px;">
-                <p style="margin-top:10px; color:grey;">The Teacher</p>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,139 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BASFLIX - A Boy's Story</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BASFLIX - A Boy's Story</title>
+
+  <!-- Tailwind (ถ้าคุณมี build tailwind อยู่แล้ว ให้ลบอันนี้) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background: #141414; overflow-x: hidden;">
 
-    <nav>
-        <div class="logo" onclick="window.scrollTo(0,0)">BASFLIX</div>
-        <ul>
-            <li><a href="#dashboard">HOME</a></li>
-            <li><a href="#origins">ORIGINS</a></li>
-            <li><a href="#portfolio">MISSIONS</a></li>
-            <li><a href="#contact">CREDITS</a></li>
-        </ul>
-    </nav>
+<body class="bg-[#141414] text-white overflow-x-hidden">
 
-    <div id="dashboard" class="fade-in" style="background: url('./img/boy welcome.png') center/cover no-repeat;">
-        <div class="dashboard-content">
-            <div style="max-width: 600px; padding-top: 60px;">
-                <h1 style="font-size: 80px; font-weight: 800; line-height: 1;">A BOY'S<br>STORY</h1>
-                <div style="margin: 20px 0; color: #aaa; font-weight: bold;">
-                    <span style="color:#46d369;">98% Match</span> &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; 1 Season
-                </div>
-                <p style="font-size: 18px; margin-bottom: 30px;">
-                    One student. One keyboard. An infinite amount of coffee. Watch the journey of how a simple design became a deployment masterpiece.
-                </p>
-                <a href="#header-story" style="text-decoration:none; background:white; color:black; padding: 15px 30px; font-size: 20px; font-weight:bold; border-radius: 4px; display:inline-flex; align-items:center; gap:10px; transition:0.2s;">
-                    <i class="fa-solid fa-play"></i> Play
-                </a>
-                <button style="background:rgba(109, 109, 110, 0.7); color:white; border:none; padding: 15px 30px; font-size: 20px; font-weight:bold; border-radius: 4px; margin-left: 10px; cursor: pointer;">
-                    <i class="fa-solid fa-circle-info"></i> More Info
-                </button>
-            </div>
+  <nav>
+    <div class="logo" id="logoTop">BASFLIX</div>
+    <ul>
+      <li><a href="#dashboard">HOME</a></li>
+      <li><a href="#season1">ORIGINS</a></li>
+      <li><a href="#season2">HOBBIES</a></li>
+      <li><a href="#season3">MOVIES</a></li>
+      <li><a href="#season4">MUSIC</a></li>
+      <li><a href="#season5">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="dashboard" class="fade-in" style="background: url('./img/boy welcome.png') center/cover no-repeat;">
+    <div class="dashboard-content">
+      <div style="max-width: 600px; padding-top: 60px;">
+        <h1 style="font-size: 80px; font-weight: 800; line-height: 1;">BOY'S<br>STORY</h1>
+        <div style="margin: 20px 0; color: #aaa; font-weight: bold;">
+          <span style="color:#d39b46;">IMDB 6.7</span> &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; 5 Seasons &nbsp;|&nbsp; TV Series &nbsp;|&nbsp; Exciting
         </div>
+        <p style="font-size: 18px; margin-bottom: 30px;">
+          One student. One keyboard. An infinite amount of coffee. Watch the journey of how a simple design became a deployment masterpiece.
+        </p>
+        <a href="#header-story" class="btn-play">
+          <i class="fa-solid fa-play"></i> Play
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-section">
+
+    <div id="header-story">
+      <div class="header-text reveal">
+        <p>Based on a True Story because it's my story.</p>
+        <h1>BOY'S <span>STORY</span></h1>
+        <div style="margin-top: 50px; animation: bounce 2s infinite;">
+          <i class="fa-solid fa-chevron-down" style="font-size: 30px; color: #E50914;"></i>
+        </div>
+      </div>
     </div>
 
-    <div class="story-section fade-in">
-        
-        <div id="header-story">
-            <div class="header-text reveal">
-                <p>Based on a True Story</p>
-                <h1>A Boy's <span>Story</span></h1>
-                <div style="margin-top: 50px; animation: bounce 2s infinite;">
-                    <i class="fa-solid fa-chevron-down" style="font-size: 30px;"></i>
-                </div>
-            </div>
+    <!-- SEASON 1 -->
+    <div id="season1" class="container">
+      <h1 class="sub-title reveal">Season 1: Origins</h1>
+      <div class="story-text">
+        <div class="chapter reveal">
+          <div class="chapter-content">
+            <span class="chapter-date">2005 - I was born</span>
+            <div class="chapter-title">Chapter 1: See the world</div>
+            <p>"10th October 2005, a boy is born in a big city in Thailand. Little did he know, his journey into the world was about to begin."</p>
+          </div>
+          <div class="chapter-thumb"><img src="https://images.unsplash.com/photo-1503915865445-4202c40c3457?w=1200"></div>
         </div>
 
-        <div id="origins" class="container">
-            <h1 class="sub-title reveal">Season 1: The Origins</h1>
-            
-            <div class="story-text">
-                
-                <div class="chapter reveal">
-                    <span class="chapter-date">2015 - The Beginning</span>
-                    <div class="chapter-title">Episode 1: The First Hello World</div>
-                    <p>
-                        [พื้นที่สำหรับเขียนเนื้อหา Assignment ส่วนที่ 1: เล่าถึงจุดเริ่มต้น ความสนใจแรก หรือแรงบันดาลใจที่ทำให้เริ่มศึกษา] <br><br>
-                        "It started with a simple command line, but it sparked a universe of possibilities..."
-                    </p>
-                </div>
-
-                <div class="chapter reveal">
-                    <span class="chapter-date">2018 - The Struggle</span>
-                    <div class="chapter-title">Episode 2: Bugs & Coffee</div>
-                    <p>
-                        [พื้นที่สำหรับเขียนเนื้อหา Assignment ส่วนที่ 2: เล่าถึงปัญหาที่เจอ การเรียนรู้ ความยากลำบากในการเขียนโค้ดช่วงแรก] <br><br>
-                        "Every syntax error was a lesson. Every crash was a challenge to overcome."
-                    </p>
-                </div>
-
-                <div class="chapter reveal">
-                    <span class="chapter-date">2025 - The Present</span>
-                    <div class="chapter-title">Episode 3: Deployment</div>
-                    <p>
-                        [พื้นที่สำหรับเขียนเนื้อหา Assignment ส่วนที่ 3: สรุปสิ่งที่ทำได้ในปัจจุบัน และเป้าหมายต่อไปในอนาคต] <br><br>
-                        "Now, the code flows. The story continues with every new project deployed."
-                    </p>
-                </div>
-
-            </div>
+        <div class="chapter reveal">
+          <div class="chapter-content">
+            <span class="chapter-date">2018 - The Spark</span>
+            <div class="chapter-title">Chapter 2: Hello World</div>
+            <p>The first time I wrote a line of code. It was simple, but it felt like magic. That was the moment I knew I wanted to be a developer.</p>
+          </div>
+          <div class="chapter-thumb"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200"></div>
         </div>
-
-        <div id="portfolio" class="container">
-            <h1 class="sub-title reveal">Season 2: Missions</h1>
-            
-            <div class="work-list">
-                <div class="work reveal">
-                    <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=500">
-                    <div class="layer">
-                        <div class="layer-content">
-                            <h3>Calculator App</h3>
-                            <p>A functional dark-mode calculator built with pure JavaScript logic.</p>
-                            <a href="#"><i class="fa-solid fa-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="work reveal">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500">
-                    <div class="layer">
-                         <div class="layer-content">
-                            <h3>My Portfolio</h3>
-                            <p>The website you are looking at right now. Responsive and Cinematic.</p>
-                            <a href="#"><i class="fa-solid fa-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="work reveal">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500">
-                    <div class="layer">
-                         <div class="layer-content">
-                            <h3>Content Creation</h3>
-                            <p>Streaming & Video Editing work. Bringing stories to life.</p>
-                            <a href="#"><i class="fa-solid fa-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="contact" class="ending reveal">
-            <p style="letter-spacing: 5px; font-size: 12px; margin-bottom:10px;">DIRECTED BY</p>
-            <h1 style="color: white; font-size: 40px;">Kanokpong Huakham</h1>
-            <div style="margin-top: 30px;">
-                <i class="fa-brands fa-github" style="font-size: 30px; margin: 0 10px; color:white;"></i>
-                <i class="fa-brands fa-linkedin" style="font-size: 30px; margin: 0 10px; color:white;"></i>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="season-divider"></div>
+
+    <!-- SEASON 2 -->
+    <div id="season2" class="container">
+      <h1 class="sub-title reveal">Season 2: The Hobbies</h1>
+      <p class="reveal" style="color:#aaa; margin-bottom:20px;">What keeps me going when I'm not coding.</p>
+      <div class="hobby-list">
+        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200"><div class="hobby-text">Listening to Music</div></div>
+        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200"><div class="hobby-text">Watching Netflix</div></div>
+        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200"><div class="hobby-text">Going to Theater</div></div>
+        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200"><div class="hobby-text">Exploring Tech</div></div>
+      </div>
+    </div>
+
+    <div class="season-divider"></div>
+
+    <!-- SEASON 3 -->
+    <div id="season3" class="container">
+      <h1 class="sub-title reveal">Season 3: Back to the Theater</h1>
+      <p class="reveal" style="color:#aaa; margin-bottom:20px;">My Top 5 Favorite Movies.</p>
+      <div class="movie-grid">
+        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
+        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
+        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
+        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
+        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BODRmZDVmNzUtZDA4ZC00NjhkLWI2M2UtN2M0ZDIzNDcxYThjL2ltYWdlXkEyXkFqcGdeQXVyNTk0MzMzODA@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
+      </div>
+    </div>
+
+    <div class="season-divider"></div>
+
+    <!-- =========================
+         SEASON 4 (NEW)
+         Left = Player, Right = Favorite Card
+    ========================== -->
+    <div id="season4" class="container">
+      <h1 class="sub-title reveal">Season 4: Pump up the Volume</h1>
+      <p class="reveal text-white/60 mb-6">One track that matches my mood the most.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start reveal">
+
+        <!-- LEFT: PLAYER -->
+        <div class="rounded-2xl border border-white/10 bg-black/40 shadow-[0_25px_70px_rgba(0,0,0,0.55)] overflow-hidden">
+          <div class="p-6 flex flex-col gap-5">
+
+            <!-- Top row -->
+            <div class="flex items-center gap-5">
+              <!-- Disc -->
+              <div class="relative w-24 h-24 shrink-0">
+                <img
+                  id="npDisc"
+                  src="./img/nanchun.jpg"
+                  onerror="this.src='https://img.youtube.com/vi/A5ZWtVZafIs/hqdefault.jpg';"
+                  alt="NAN CHUN cover"
+                  class="w-24 h-24 rounded-full object-cover ring-4 ring-zinc-700/60 shadow-md"
+                />
+                <div class="absolute inset-0 rounded-full ring-1 ring-white/10"></div>
+                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-zinc-900 ring-4 ring-zinc-300/70"></div>
+              </div>
+
+              <!-- Song info -->
+              <div class="min-w-0">
+                <p class="text-xs font-black tracking-[0.2em] text-white/60 uppercase">Now Playing</p>
+                <h3 class="text-3xl font-extrabold leading-tight">NAN CHUN</h3>
+                <p class="text-sm font-bold text-[#E50914]">SE SO NEON</p>
+
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
+                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
+                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Late Night Mood</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seek bar -->
+            <div class="flex items-center gap-3">
+              <span id="npCurrent" class="text-xs text-white/60 tabular-nums w-10">0:00</span>
+
+              <input
+                id="npSeek"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="np-range w-full"
+                aria-label="Seek"
+              />
+
+              <span id="npDuration" class="text-xs text-white/60 tabular-nums w-10 text-right">0:00</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-3">
+              <button
+                id="npPlay"
+                type="button"
+                class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-black font-extrabold hover:brightness-95 transition"
+              >
+                <i id="npPlayIcon" class="fa-solid fa-play"></i>
+                <span id="npPlayText">Play</span>
+              </button>
+
+              <button
+                id="npStop"
+                type="button"
+                class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition"
+              >
+                <i class="fa-solid fa-stop"></i>
+                Stop
+              </button>
+
+              <a
+                id="npOpenYT"
+                href="https://www.youtube.com/watch?v=A5ZWtVZafIs"
+                target="_blank" rel="noopener"
+                class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition inline-flex items-center justify-center gap-2"
+              >
+                <i class="fa-brands fa-youtube text-[#E50914]"></i>
+                YouTube
+              </a>
+            </div>
+
+            <p id="npStatus" class="text-xs text-[#E50914] font-bold min-h-[16px]"></p>
+          </div>
+
+          <!-- Hidden YouTube mount -->
+          <div id="yt-nan-player" class="yt-audio-only"></div>
+        </div>
+
+        <!-- RIGHT: FAVORITE CARD (แบบรูปที่คุณส่ง) -->
+        <section class="rounded-2xl border border-white/10 bg-black/40 shadow-[0_25px_70px_rgba(0,0,0,0.55)] overflow-hidden">
+          <div class="p-8">
+            <p class="text-xs font-black tracking-[0.25em] text-white/60 uppercase">MY FAVORITE SONG</p>
+            <h2 class="text-5xl font-extrabold mt-3 leading-none">NAN CHUN</h2>
+            <p class="text-sm font-extrabold text-[#E50914] mt-3">SE SO NEON</p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Late Night Mood</span>
+            </div>
+
+            <p class="mt-6 text-sm leading-7 text-white/80">
+              เพลงนี้เป็นเพลงโปรดของผม เพราะผมได้ยินมันครั้งแรกจากศิลปินคนหนึ่งที่ผมชื่นชอบ
+              เขาร้องโคเวอร์ไว้ ถึงแม้ผมจะฟังไม่ออกทุกคำ แต่ความรู้สึกมัน “กินใจ” แบบสุดๆ
+              น้ำเสียงที่แหบและแสบซ่าน บวกกับการเอื้อนที่พอดี… มันเข้ากับมู้ดของผมมากๆ
+              เหมือนเพลงพูดแทนความรู้สึกที่อธิบายเป็นคำไม่ค่อยได้
+            </p>
+
+            <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a
+                href="https://www.youtube.com/watch?v=A5ZWtVZafIs"
+                target="_blank" rel="noopener"
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-black font-extrabold hover:brightness-95 transition"
+              >
+                <i class="fa-solid fa-play"></i> Play on YouTube
+              </a>
+
+              <button
+                id="copyTitleBtn"
+                type="button"
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition"
+              >
+                <i class="fa-regular fa-copy"></i> Copy title
+              </button>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-white/10 text-white/50 text-xs italic">
+              “Even if I don't understand every word, I still feel everything.”
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="season-divider"></div>
+
+    <!-- SEASON 5 -->
+    <div id="season5" class="ending reveal">
+      <h1 style="color: #E50914; font-size: 50px; margin-bottom: 20px;">SEASON 5</h1>
+      <h2 style="color: white; font-size: 30px; margin-bottom: 40px;">Catch Me If You Can</h2>
+      <p style="margin-bottom: 30px; font-size: 18px;">"The story isn't over yet. Let's create the next episode together."</p>
+      <div class="contact-icons">
+        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <p style="margin-top: 50px; font-size: 12px; opacity: 0.5;">
+        © 2025 Kanokpong Huakham. All rights reserved.<br>
+        Directed by Kanokpong. Produced by Coffee.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>

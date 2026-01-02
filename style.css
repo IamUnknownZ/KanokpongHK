@@ -1,137 +1,531 @@
-/* --- 1. FONTS & RESET --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =========================================
+   BASFLIX — style.css (FULL)
+   Netflix-ish theme + Index gate + Reveal + Fix anchors
+========================================= */
 
-* { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { background: #141414; color: #fff; overflow-x: hidden; }
+/* --- 1) FONTS & RESET --- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-/* --- 2. INTRO ANIMATION --- */
-@keyframes netflix-intro-zoomout {
-    0% { opacity: 0; transform: scale(0.5); }
-    15% { opacity: 1; transform: scale(1); }
-    65% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(20); }
-}
-.netflix-logo-anim {
-    color: #E50914; font-family: 'Arial Black', sans-serif; font-size: 60px;
-    animation: netflix-intro-zoomout 3s ease-in-out forwards;
-}
-
-/* Helper Classes */
-.hidden { display: none !important; }
-.fade-in { animation: fadeIn 1.2s ease-in forwards; }
-.fade-out { opacity: 0; transition: opacity 0.8s ease-out; pointer-events: none; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(1.02); } to { opacity: 1; transform: scale(1); } }
-
-/* --- 3. NAVBAR --- */
-nav {
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-    padding: 20px 5%; position: fixed; width: 100%; top: 0; z-index: 9999;
-    transition: background 0.3s;
-}
-nav.scrolled { background: #141414; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-.logo { color: #E50914; font-size: 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
-nav ul li { display: inline-block; list-style: none; margin: 10px 15px; }
-nav ul li a { color: #b3b3b3; text-decoration: none; font-size: 14px; font-weight: 500; position: relative; transition: 0.3s; }
-nav ul li a:hover { color: #fff; }
-nav ul li a::after { content: ""; width: 0%; height: 3px; background-color: #E50914; position: absolute; left: 0; bottom: -6px; transition: 0.5s; }
-nav ul li a:hover::after { width: 100%; }
-
-/* --- 4. HERO DASHBOARD --- */
-#dashboard { width: 100%; height: 100vh; position: relative; }
-.dashboard-content {
-    width: 100%; height: 100%; background: linear-gradient(to right, black 10%, transparent 90%);
-    padding: 0 5%; display: flex; align-items: center;
+:root{
+  --bg: #141414;
+  --bg2: #0b0b0b;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,.65);
+  --muted2: rgba(255,255,255,.45);
+  --line: rgba(255,255,255,.10);
+  --shadow: rgba(0,0,0,.55);
+  --red: #E50914;
+  --gold: #d39b46;
+  --radius: 14px;
+  --navH: 90px;
 }
 
-/* --- 5. STORY CONTENT (Blueprint Style) --- */
-.story-section { padding-top: 0; position: relative; z-index: 10; }
-#header-story {
-    width: 100%; min-height: 60vh;
-    background-image: linear-gradient(to bottom, #141414, transparent 50%, #141414), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072');
-    background-size: cover; background-position: center;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    margin-bottom: 50px;
+*{ margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top: var(--navH); /* FIX: jump anchors under fixed navbar */
 }
-.header-text h1 { font-size: 60px; margin-top: 20px; text-shadow: 0 0 20px rgba(229, 9, 20, 0.6); }
-.header-text span { color: #E50914; }
-
-/* Timeline / Episodes Style */
-.chapter {
-    margin-bottom: 60px;
-    padding-left: 20px;
-    border-left: 3px solid #333; /* เส้น Timeline */
-    transition: 0.3s;
-}
-.chapter:hover { border-left: 3px solid #E50914; } /* เส้นเปลี่ยนสีเมื่อชี้ */
-.chapter-title { font-size: 24px; color: #E50914; font-weight: bold; margin-bottom: 10px; }
-.chapter-date { font-size: 14px; color: #888; margin-bottom: 15px; display: block; font-style: italic; }
-
-/* --- 6. SECTIONS COMMON --- */
-.container { padding: 80px 10%; }
-.sub-title { font-size: 40px; font-weight: 600; color: #fff; margin-bottom: 40px; border-left: 5px solid #E50914; padding-left: 15px; }
-.story-text { font-size: 18px; line-height: 1.8; color: #ccc; max-width: 900px; }
-
-/* --- 7. MISSIONS GRID (NEW PREMIUM HOVER) --- */
-.work-list {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); grid-gap: 30px;
-}
-.work {
-    border-radius: 8px; position: relative; overflow: hidden; cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; /* Bouncy Effect */
-}
-.work img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.5s ease;
+body{
+  background: var(--bg);
+  color: var(--text);
+  overflow-x:hidden;
 }
 
-/* Hover Effect: Scale Up + Glow */
-.work:hover {
-    transform: scale(1.05); /* ขยายทั้งการ์ด */
-    z-index: 2;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* เงาฟุ้งๆ */
-}
-.work:hover img {
-    transform: scale(1.1); /* รูปขยายเพิ่มอีกนิด */
-    filter: brightness(0.7); /* ทำให้รูปมืดลงนิดหน่อยเพื่อให้ตัวหนังสือเด่น */
+/* apply scroll margin to sections (extra safe) */
+#dashboard, #season1, #season2, #season3, #season4, #season5, #header-story{
+  scroll-margin-top: var(--navH);
 }
 
-/* The Layer (New Gradient Style) */
-.layer {
-    width: 100%; height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); /* ไล่สีดำจากล่างขึ้นบน */
-    position: absolute; left: 0; bottom: 0;
-    display: flex; align-items: flex-end; /* ตัวหนังสืออยู่ล่าง */
-    justify-content: flex-start; /* ชิดซ้าย */
-    padding: 30px;
-    opacity: 0; /* ซ่อนไว้ก่อน */
-    transition: opacity 0.4s ease;
-}
-.work:hover .layer { opacity: 1; }
-
-.layer-content {
-    transform: translateY(20px); /* ดันลงไปนิดนึง */
-    transition: transform 0.4s ease;
-}
-.work:hover .layer-content { transform: translateY(0); /* ลอยขึ้นมา */ }
-
-.layer h3 { font-size: 22px; font-weight: 600; margin-bottom: 5px; color: #fff; }
-.layer p { font-size: 14px; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
-.layer i {
-    color: #E50914; background: white; width: 35px; height: 35px;
-    line-height: 35px; border-radius: 50%; font-size: 16px; text-align: center;
+/* --- 2) HELPERS --- */
+.hidden{ display:none !important; }
+.fade-in{ animation: fadeIn 1.2s ease-in forwards; }
+.fade-out{ opacity:0; transition: opacity .8s ease; pointer-events:none; }
+@keyframes fadeIn{
+  from{ opacity:0; transform:scale(1.02); }
+  to{ opacity:1; transform:scale(1); }
 }
 
-/* --- 8. FOOTER --- */
-.ending { text-align: center; padding: 50px 0; background: #000; color: #777; border-top: 1px solid #333; }
-.reveal { opacity: 0; transform: translateY(100px); transition: all 1.5s ease; }
-.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal{ opacity:0; transform: translateY(50px); transition: all 1s ease; }
+.reveal.active{ opacity:1; transform: translateY(0); }
 
-/* Mobile */
-@media only screen and (max-width: 600px) {
-    .netflix-logo-anim { font-size: 40px; }
-    h1 { font-size: 40px !important; }
-    nav .logo { font-size: 20px; }
-    nav ul li { margin: 10px 5px; }
-    nav ul li a { font-size: 12px; }
+.soft{ color: var(--muted); }
+
+/* --- 3) INTRO ANIMATION (INDEX) --- */
+@keyframes netflix-intro-zoomout{
+  0%{ opacity:0; transform:scale(.5); }
+  15%{ opacity:1; transform:scale(1); }
+  65%{ opacity:1; transform:scale(1); }
+  100%{ opacity:0; transform:scale(20); }
+}
+.netflix-logo-anim{
+  color: var(--red);
+  font-family: "Arial Black", sans-serif;
+  font-size: 60px;
+  letter-spacing: 2px;
+  animation: netflix-intro-zoomout 3s ease-in-out forwards;
+}
+
+/* ===== INDEX PAGE (Who’s watching) ===== */
+.index-body{
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  overflow:hidden;
+}
+
+.intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.profile-gate{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap: 28px;
+  padding: 24px;
+}
+
+.profile-title{
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.profiles{
+  display:flex;
+  gap: 30px;
+  flex-wrap:wrap;          /* prevent overflow */
+  justify-content:center;
+  max-width: 720px;
+}
+
+.profile-card{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: .75;
+  transition: .25s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width: 180px;
+}
+
+.profile-card:hover{
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.profile-card img{
+  width: 150px;            /* keep big like original */
+  height: 150px;
+  border-radius: 6px;
+  object-fit: cover;
+  display:block;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.profile-card span{
+  margin-top: 10px;
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+@media (max-width: 420px){
+  .profile-title{ font-size: 2.2rem; }
+  .profile-card{ width: 160px; }
+  .profile-card img{ width: 140px; height: 140px; }
+}
+
+/* --- 4) NAVBAR --- */
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  padding: 18px 5%;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:9999;
+  transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+}
+nav.scrolled{
+  background: rgba(20,20,20,.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 14px rgba(0,0,0,.55);
+}
+
+.logo{
+  color: var(--red);
+  font-size: 30px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor:pointer;
+  user-select:none;
+}
+
+nav ul li{
+  display:inline-block;
+  list-style:none;
+  margin: 10px 15px;
+}
+
+nav ul li a{
+  color: rgba(255,255,255,.65);
+  text-decoration:none;
+  font-size: 14px;
+  font-weight: 600;
+  position:relative;
+  transition: .25s ease;
+}
+nav ul li a:hover{ color:#fff; }
+nav ul li a::after{
+  content:"";
+  width:0%;
+  height:3px;
+  background: var(--red);
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  transition: .35s ease;
+}
+nav ul li a:hover::after{ width:100%; }
+
+/* --- 5) HERO DASHBOARD --- */
+#dashboard{
+  width:100%;
+  height:100vh;
+  position:relative;
+  padding-top: 70px; /* prevent nav overlap visually */
+}
+.dashboard-content{
+  width:100%;
+  height:100%;
+  background: linear-gradient(to right, rgba(0,0,0,.90) 10%, rgba(0,0,0,.25) 55%, transparent 90%);
+  padding: 0 5%;
+  display:flex;
+  align-items:center;
+}
+
+.btn-play{
+  text-decoration:none;
+  background:#fff;
+  color:#000;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 6px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition: .2s ease;
+}
+.btn-play:hover{
+  filter: brightness(.92);
+  transform: translateY(-1px);
+}
+
+/* --- 6) STORY HEADER --- */
+.story-section{ padding-top:0; position:relative; z-index:10; }
+
+#header-story{
+  width:100%;
+  min-height: 55vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(229,9,20,.18), transparent 55%),
+    linear-gradient(to bottom, rgba(20,20,20,1), rgba(20,20,20,.8), rgba(20,20,20,1));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin-bottom: 20px;
+}
+
+#header-story .header-text p{
+  font-family: "Georgia", serif;
+  color: rgba(255,255,255,.65);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.header-text h1,
+.header-text h1 span{
+  font-family: "Georgia","Times New Roman",serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--red);
+  font-size: 80px;
+  letter-spacing: -2px;
+  line-height: 1;
+  text-shadow: none;
+  margin-top: 10px;
+}
+
+/* small bounce for arrow */
+@keyframes bounce{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(10px); }
+}
+
+/* --- Divider --- */
+.season-divider{
+  width:100%;
+  height:1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.22), transparent);
+  margin: 60px 0;
+  opacity:.6;
+}
+
+/* --- 7) SECTIONS COMMON --- */
+.container{
+  padding: 80px 10%;
+  max-width: 1200px;   /* center all sections */
+  margin: 0 auto;
+}
+
+.sub-title{
+  font-size: 36px;
+  font-weight: 700;
+  color:#fff;
+  margin-bottom: 30px;
+  border-left: 5px solid var(--red);
+  padding-left: 15px;
+}
+
+.story-text{
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255,255,255,.78);
+  max-width: 1000px;
+}
+
+/* --- 8) SEASON 1 CHAPTER CARDS --- */
+.chapter{
+  margin-bottom: 60px;
+  padding: 40px;
+  gap: 40px;
+  border-left: 3px solid rgba(255,255,255,.12);
+  background: linear-gradient(to right, rgba(255,255,255,.03), transparent);
+  border-radius: 10px;
+  cursor:pointer;
+  border: 1px solid transparent;
+  transition: all .25s ease;
+  display:flex;
+  align-items:center;
+  margin-left:auto;
+  margin-right:0;
+  max-width: 95%;
+}
+
+.chapter:hover{
+  border-left: 3px solid var(--red);
+  background: rgba(255,255,255,.05);
+  transform: scale(1.01);
+}
+
+.chapter-content{ flex:1; }
+.chapter-title{
+  font-size: 24px;
+  color: var(--red);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.chapter-date{
+  font-size: 14px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 15px;
+  display:block;
+  font-style: italic;
+}
+
+.chapter-thumb{
+  flex: 0 0 300px;
+  width: 300px;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow:hidden;
+}
+.chapter-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform .5s ease, filter .5s ease;
+}
+.chapter:hover .chapter-thumb img{
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+/* --- 9) HOBBIES --- */
+.hobby-list{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.hobby-card{
+  position:relative;
+  border-radius: 10px;
+  overflow:hidden;
+  height: 180px;
+  cursor:pointer;
+  transition: transform .25s ease;
+}
+.hobby-card:hover{ transform: translateY(-2px); }
+
+.hobby-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter: brightness(.6);
+  transform: scale(1.03);
+}
+
+.hobby-text{
+  position:absolute;
+  bottom: 15px;
+  left: 15px;
+  color:#fff;
+  font-weight: 900;
+  font-size: 20px;
+  text-shadow: 0 4px 12px rgba(0,0,0,.8);
+}
+
+/* --- 10) MOVIES GRID --- */
+.movie-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.movie-poster{
+  border-radius: 8px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  aspect-ratio: 2/3;
+  transition: transform .25s ease;
+}
+.movie-poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.movie-poster:hover{
+  transform: scale(1.07);
+  z-index:5;
+}
+
+.poster-overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition: .25s ease;
+}
+.movie-poster:hover .poster-overlay{ opacity:1; }
+.poster-overlay i{ font-size: 40px; color: var(--red); }
+
+/* --- 11) ENDING / CONTACT --- */
+.ending{
+  text-align:center;
+  padding: 100px 0;
+  background:#000;
+  color: rgba(255,255,255,.5);
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+
+.contact-icons i{
+  font-size: 40px;
+  margin: 0 20px;
+  color:#fff;
+  transition: .25s ease;
+  cursor:pointer;
+}
+.contact-icons i:hover{
+  color: var(--red);
+  transform: scale(1.15);
+}
+
+/* --- 12) MUSIC PLAYER HELPERS (used by Tailwind section) --- */
+/* Disc spin */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 3s linear infinite; }
+
+/* Custom range style for Season4 seek bar */
+.np-range{
+  -webkit-appearance:none;
+  appearance:none;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  outline:none;
+}
+.np-range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#fff;
+  border:2px solid rgba(255,255,255,.35);
+  cursor:pointer;
+}
+.np-range::-moz-range-thumb{
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#fff;
+  border:2px solid rgba(255,255,255,.35);
+  cursor:pointer;
+}
+
+/* --- 13) RESPONSIVE --- */
+@media (max-width: 768px){
+  .chapter{
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    max-width: 100%;
+    padding: 22px;
+    gap: 18px;
+  }
+  .chapter-thumb{
+    width:100%;
+    flex: 0 0 auto;
+  }
+  .netflix-logo-anim{ font-size: 40px; }
+  .header-text h1{ font-size: 54px; }
+  nav .logo{ font-size: 22px; }
+  nav ul li{ margin: 10px 8px; }
+  nav ul li a{ font-size: 12px; }
+}
+
+/* super small */
+@media (max-width: 420px){
+  .container{ padding: 70px 6%; }
+  .sub-title{ font-size: 30px; }
+}
+/* YouTube audio-only mount (DON'T use display:none) */
+.yt-audio-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: -9999px;
+  top: -9999px;
+  overflow: hidden;
 }
