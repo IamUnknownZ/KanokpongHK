@@ -11,6 +11,12 @@
 </head>
 
 <body class="bg-[#141414] text-white overflow-x-hidden">
+    <div id="home-loader" class="home-loader">
+  <div class="home-loader__inner">
+    <div class="home-loader__spinner"></div>
+    <div class="home-loader__text">Loading MOVIES…</div>
+  </div>
+</div>
 
   <nav>
     <div class="logo" id="logoTop">BASFLIX</div>
@@ -54,27 +60,106 @@
     </div>
 
     <div id="season1" class="container">
-      <h1 class="sub-title reveal">Season 1: Origins</h1>
-      <div class="story-text">
+    <h1 class="sub-title reveal">Season 1: Origins</h1>
+
+    <div class="story-text">
+        <!-- Chapter 1 (keep) -->
         <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2005 - I was born</span>
+        <div class="chapter-content">
+            <span class="chapter-date">2005 — I was born</span>
             <div class="chapter-title">Chapter 1: See the world</div>
-            <p>"10th October 2005, a boy is born in a big city in Thailand. Little did he know, his journey into the world was about to begin."</p>
-          </div>
-          <div class="chapter-thumb"><img src="https://images.unsplash.com/photo-1503915865445-4202c40c3457?w=1200"></div>
+            <p>
+            "10th October 2005, a boy is born in a big city in Thailand.
+            Little did he know, his journey into the world was about to begin."
+            </p>
+        </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1503915865445-4202c40c3457?w=1200" alt="Origins - Birth" />
+        </div>
         </div>
 
+        <!-- Chapter 2 (new) -->
         <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2018 - The Spark</span>
+        <div class="chapter-content">
+            <span class="chapter-date">2018 — The Spark</span>
             <div class="chapter-title">Chapter 2: Hello World</div>
-            <p>The first time I wrote a line of code. It was simple, but it felt like magic. That was the moment I knew I wanted to be a developer.</p>
-          </div>
-          <div class="chapter-thumb"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200"></div>
+            <p>
+            The first time I typed “Hello, World” felt like unlocking a secret door.
+            It wasn’t about the code being perfect — it was the feeling that I could
+            create something from nothing. From that day on, I kept learning,
+            experimenting, breaking things, and trying again… because I knew this was
+            the path I wanted.
+            </p>
         </div>
-      </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200" alt="Origins - First Code" />
+        </div>
+        </div>
+
+        <!-- Chapter 3 (new: Graduation 2023) -->
+        <div class="chapter reveal">
+        <div class="chapter-content">
+            <span class="chapter-date">2023 — Graduation</span>
+            <div class="chapter-title">Chapter 3: Graduation 2023</div>
+            <p>
+            In 2023, I completed my compulsory education and graduated from
+            Triam Udom Suksa Pattanakarn Nonthaburi School, Science–Computer program.
+            It was a turning point — proof that I could stay consistent, learn under
+            pressure, and keep moving toward the future I wanted in tech.
+            </p>
+        </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200" alt="Origins - Graduation" />
+        </div>
+        </div>
+
+        <!-- Chapter 4 (placeholder) -->
+        <div class="chapter reveal">
+        <div class="chapter-content">
+            <span class="chapter-date">2024 — First Real Project</span>
+            <div class="chapter-title">Chapter 4: First Real Project</div>
+            <p>
+            This was the first time I built something that felt real — not just a practice file.
+            I learned how to plan, design, and finish what I started, even when it got messy.
+            </p>
+        </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200" alt="Origins - Project" />
+        </div>
+        </div>
+
+        <!-- Chapter 5 (placeholder) -->
+        <div class="chapter reveal">
+        <div class="chapter-content">
+            <span class="chapter-date">2025 — Leveling Up</span>
+            <div class="chapter-title">Chapter 5: Leveling Up</div>
+            <p>
+            I began taking my skills seriously: cleaner code, better structure, and more confidence.
+            Every mistake became a lesson, and every lesson became momentum.
+            </p>
+        </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200" alt="Origins - Learning" />
+        </div>
+        </div>
+
+        <!-- Chapter 6 (placeholder) -->
+        <div class="chapter reveal">
+        <div class="chapter-content">
+            <span class="chapter-date">Now — The Next Episode</span>
+            <div class="chapter-title">Chapter 6: The Next Episode</div>
+            <p>
+            The story is still going. New goals, new challenges, and bigger dreams —
+            I’m ready for whatever comes next.
+            </p>
+        </div>
+        <div class="chapter-thumb">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200" alt="Origins - Next Episode" />
+        </div>
+        </div>
     </div>
+    </div>
+
 
     <div class="season-divider"></div>
 
@@ -91,9 +176,12 @@
     </div>
 
     <div class="season-divider"></div>
-    <h1 class="sub-title reveal" style="align-self: flex-start;">
-        Season 3: Back to the theater
-    </h1>
+    <header class="season-head reveal s3-head">
+    <h1 class="sub-title s3-title">Season 3: Back to the theater</h1>
+     <p class="sub-caption s3-caption">
+        Mostly seen in IMAX — these are the movies that hit me the hardest on the big screen.
+    </p>
+</header>
     <div id="season3" class="container">
     
 

@@ -240,6 +240,64 @@ $(function() {
         }
     });
 
+
+    /* =========================
+   HOME LOADER: wait 3s + images loaded
+========================= */
+(function () {
+  const MIN_DELAY = 3000;
+
+  function wait(ms) {
+    return new Promise((res) => setTimeout(res, ms));
+  }
+
+  function preloadUrl(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve({ url, ok: true });
+      img.onerror = () => resolve({ url, ok: false });
+      img.src = url;
+    });
+  }
+
+  function collectImageUrls() {
+    const urls = new Set();
+
+    // 1) <img src="...">
+    document.querySelectorAll("img").forEach((img) => {
+      if (img.src) urls.add(img.src);
+    });
+
+    // 2) elements with inline background-image: url('...')
+    document.querySelectorAll("[style*='background-image']").forEach((el) => {
+      const bg = el.style.backgroundImage || "";
+      const match = bg.match(/url\((['"]?)(.*?)\1\)/i);
+      if (match && match[2]) urls.add(match[2]);
+    });
+
+    return [...urls];
+  }
+
+  async function runHomeLoader() {
+    const loader = document.getElementById("home-loader");
+    if (!loader) return;
+
+    // start waiting for images + minimum delay
+    const urls = collectImageUrls();
+
+    const imagesPromise = Promise.allSettled(urls.map(preloadUrl));
+    const minDelayPromise = wait(MIN_DELAY);
+
+    await Promise.all([imagesPromise, minDelayPromise]);
+
+    loader.classList.add("is-hidden");
+    setTimeout(() => loader.remove(), 600);
+  }
+
+  // run on home only (if loader exists)
+  window.addEventListener("load", runHomeLoader);
+})();
+
     // Navigation Dots
     $('[data-navigation] li').on('click', function() {
         var newIndex = $(this).index();
