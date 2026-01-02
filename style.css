@@ -432,3 +432,37 @@ nav ul li a:hover::after{ width:100%; }
   .s3-caption{ font-size: 14px; }
   .s3-head::after{ width: 180px; }
 }
+/* Season 3: make title clickable + keep red hover like before */
+#season3 .card-movie__content{
+  position: absolute;     /* คุณมีอยู่แล้ว แต่ย้ำให้ชัวร์ */
+  z-index: 20;            /* ดันขึ้นเหนือ overlay */
+}
+
+#season3 .card-movie__title{
+  display: inline-block;
+  text-decoration: none;  /* เลยดูไม่เหมือนลิงก์ แต่กดได้ */
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 21;            /* กันโดนทับอีกชั้น */
+}
+
+/* overlay ไม่บังคลิก */
+#season3 .card-movie::before,
+#season3 .card-movie::after{
+  pointer-events: none;
+}
+
+/* title ปกติ */
+#season3 .card-movie__title{
+  color: #fff;
+  text-shadow: none;
+  transition: color .25s ease, text-shadow .25s ease;
+}
+
+/* แดงเฉพาะตอน hover ที่ชื่อเรื่อง */
+#season3 .card-movie__title:hover{
+  color: var(--red);
+  text-shadow: 2px 2px 0px #fff;
+}
+  
