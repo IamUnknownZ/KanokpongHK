@@ -1,6 +1,5 @@
 /* =========================================
-   BASFLIX — style.css (FULL)
-   Netflix-ish theme + Index gate + Reveal + Fix anchors
+   BASFLIX — style.css (FIXED WHITE SCREEN)
 ========================================= */
 
 /* --- 1) FONTS & RESET --- */
@@ -8,49 +7,25 @@
 
 :root{
   --bg: #141414;
-  --bg2: #0b0b0b;
   --text: #ffffff;
   --muted: rgba(255,255,255,.65);
-  --muted2: rgba(255,255,255,.45);
-  --line: rgba(255,255,255,.10);
-  --shadow: rgba(0,0,0,.55);
   --red: #E50914;
-  --gold: #d39b46;
-  --radius: 14px;
   --navH: 90px;
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top: var(--navH); /* FIX: jump anchors under fixed navbar */
-}
-body{
-  background: var(--bg);
-  color: var(--text);
-  overflow-x:hidden;
-}
+html{ scroll-behavior:smooth; scroll-padding-top: var(--navH); }
+body{ background: var(--bg); color: var(--text); overflow-x:hidden; }
 
-/* apply scroll margin to sections (extra safe) */
-#dashboard, #season1, #season2, #season3, #season4, #season5, #header-story{
-  scroll-margin-top: var(--navH);
-}
-
-/* --- 2) HELPERS --- */
+/* Helpers */
 .hidden{ display:none !important; }
 .fade-in{ animation: fadeIn 1.2s ease-in forwards; }
 .fade-out{ opacity:0; transition: opacity .8s ease; pointer-events:none; }
-@keyframes fadeIn{
-  from{ opacity:0; transform:scale(1.02); }
-  to{ opacity:1; transform:scale(1); }
-}
-
+@keyframes fadeIn{ from{ opacity:0; transform:scale(1.02); } to{ opacity:1; transform:scale(1); } }
 .reveal{ opacity:0; transform: translateY(50px); transition: all 1s ease; }
 .reveal.active{ opacity:1; transform: translateY(0); }
 
-.soft{ color: var(--muted); }
-
-/* --- 3) INTRO ANIMATION (INDEX) --- */
+/* --- 2) INTRO ANIMATION --- */
 @keyframes netflix-intro-zoomout{
   0%{ opacity:0; transform:scale(.5); }
   15%{ opacity:1; transform:scale(1); }
@@ -58,474 +33,208 @@ body{
   100%{ opacity:0; transform:scale(20); }
 }
 .netflix-logo-anim{
-  color: var(--red);
-  font-family: "Arial Black", sans-serif;
-  font-size: 60px;
-  letter-spacing: 2px;
-  animation: netflix-intro-zoomout 3s ease-in-out forwards;
+  color: var(--red); font-family: "Arial Black", sans-serif; font-size: 60px;
+  letter-spacing: 2px; animation: netflix-intro-zoomout 3s ease-in-out forwards;
 }
+.index-body{ background: var(--bg); min-height:100vh; overflow:hidden; }
+.intro{ position:fixed; inset:0; background:#000; display:flex; align-items:center; justify-content:center; z-index:999; }
 
-/* ===== INDEX PAGE (Who’s watching) ===== */
-.index-body{
-  background: var(--bg);
-  color: var(--text);
-  min-height:100vh;
-  overflow:hidden;
-}
+/* Profile Gate */
+.profile-gate{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap: 30px; animation: fadeIn 1s ease-in; }
+.profile-title{ font-size: 3.5rem; font-weight: 500; margin-bottom: 10px; }
+.profiles{ display:flex; gap: 30px; justify-content:center; }
+.profile-card{ background: transparent; border: none; cursor: pointer; transition: .3s ease; display:flex; flex-direction:column; align-items:center; }
+.img-wrapper { width: 160px; height: 160px; border-radius: 4px; overflow: hidden; border: 3px solid transparent; transition: all 0.3s ease; margin-bottom: 15px; }
+.profile-card img{ width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); transition: 0.3s ease; }
+.profile-card:hover .img-wrapper { border-color: #fff; transform: scale(1.05); }
+.profile-card:hover img { filter: brightness(1); }
+.profile-card span{ color: #808080; font-size: 1.3rem; font-weight: 400; transition: 0.3s; }
+.profile-card:hover span{ color: #fff; font-weight: 600; }
 
-.intro{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-
-.profile-gate{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap: 28px;
-  padding: 24px;
-}
-
-.profile-title{
-  font-size: 3rem;
-  font-weight: 800;
-}
-
-.profiles{
-  display:flex;
-  gap: 30px;
-  flex-wrap:wrap;          /* prevent overflow */
-  justify-content:center;
-  max-width: 720px;
-}
-
-.profile-card{
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  opacity: .75;
-  transition: .25s ease;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width: 180px;
-}
-
-.profile-card:hover{
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.profile-card img{
-  width: 150px;            /* keep big like original */
-  height: 150px;
-  border-radius: 6px;
-  object-fit: cover;
-  display:block;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-
-.profile-card span{
-  margin-top: 10px;
-  color: #9ca3af;
-  font-weight: 700;
-}
-
-@media (max-width: 420px){
-  .profile-title{ font-size: 2.2rem; }
-  .profile-card{ width: 160px; }
-  .profile-card img{ width: 140px; height: 140px; }
-}
-
-/* --- 4) NAVBAR --- */
+/* --- 3) NAVBAR --- */
 nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  padding: 18px 5%;
-  position:fixed;
-  width:100%;
-  top:0;
-  z-index:9999;
-  transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  padding: 18px 5%; position:fixed; width:100%; top:0; z-index:9999;
+  transition: background .3s ease, box-shadow .3s ease;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
 }
-nav.scrolled{
-  background: rgba(20,20,20,.85);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 14px rgba(0,0,0,.55);
-}
-
-.logo{
-  color: var(--red);
-  font-size: 30px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor:pointer;
-  user-select:none;
-}
-
-nav ul li{
-  display:inline-block;
-  list-style:none;
-  margin: 10px 15px;
-}
-
-nav ul li a{
-  color: rgba(255,255,255,.65);
-  text-decoration:none;
-  font-size: 14px;
-  font-weight: 600;
-  position:relative;
-  transition: .25s ease;
-}
+nav.scrolled{ background: rgba(20,20,20,.95); box-shadow: 0 2px 14px rgba(0,0,0,.55); }
+.logo{ color: var(--red); font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor:pointer; }
+nav ul li{ display:inline-block; list-style:none; margin: 10px 15px; }
+nav ul li a{ color: rgba(255,255,255,.7); text-decoration:none; font-size: 14px; font-weight: 600; position:relative; transition: .25s ease; }
 nav ul li a:hover{ color:#fff; }
-nav ul li a::after{
-  content:"";
-  width:0%;
-  height:3px;
-  background: var(--red);
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  transition: .35s ease;
-}
+nav ul li a::after{ content:""; width:0%; height:3px; background: var(--red); position:absolute; left:0; bottom:-6px; transition: .35s ease; }
 nav ul li a:hover::after{ width:100%; }
 
-/* --- 5) HERO DASHBOARD --- */
-#dashboard{
-  width:100%;
-  height:100vh;
-  position:relative;
-  padding-top: 70px; /* prevent nav overlap visually */
-}
-.dashboard-content{
-  width:100%;
-  height:100%;
-  background: linear-gradient(to right, rgba(0,0,0,.90) 10%, rgba(0,0,0,.25) 55%, transparent 90%);
-  padding: 0 5%;
-  display:flex;
-  align-items:center;
-}
+/* --- 4) SECTIONS --- */
+#dashboard{ width:100%; height:100vh; position:relative; padding-top: 70px; }
+.dashboard-content{ width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,.90) 10%, rgba(0,0,0,.25) 55%, transparent 90%); padding: 0 5%; display:flex; align-items:center; }
+.btn-play{ text-decoration:none; background:#fff; color:#000; padding: 15px 30px; font-size: 20px; font-weight: 900; border-radius: 6px; display:inline-flex; align-items:center; gap:10px; transition: .2s ease; }
+.btn-play:hover{ filter: brightness(.92); transform: translateY(-1px); }
 
-.btn-play{
-  text-decoration:none;
-  background:#fff;
-  color:#000;
-  padding: 15px 30px;
-  font-size: 20px;
-  font-weight: 900;
-  border-radius: 6px;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  transition: .2s ease;
-}
-.btn-play:hover{
-  filter: brightness(.92);
-  transform: translateY(-1px);
-}
+#header-story{ width:100%; min-height: 55vh; background: #141414; display:flex; align-items:center; justify-content:center; text-align:center; }
+#header-story .header-text p{ font-family: "Georgia", serif; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-size: 14px; margin-bottom: 5px; }
+.header-text h1{ font-family: "Georgia","Times New Roman",serif; font-weight: 900; text-transform: uppercase; color: var(--red); font-size: 80px; letter-spacing: -2px; line-height: 1; margin-top: 10px; }
+@keyframes bounce{ 0%, 100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
 
-/* --- 6) STORY HEADER --- */
-.story-section{ padding-top:0; position:relative; z-index:10; }
+.container{ padding: 80px 10%; margin: 0 auto; max-width: 1200px; }
+.sub-title{ font-size: 36px; font-weight: 700; color:#fff; margin-bottom: 30px; border-left: 5px solid var(--red); padding-left: 15px; }
+.story-text{ font-size: 18px; line-height: 1.8; color: rgba(255,255,255,.78); max-width: 1000px; }
+.season-divider{ width:100%; height:1px; background: linear-gradient(to right, transparent, rgba(255,255,255,.22), transparent); margin: 60px 0; opacity:.6; }
 
-#header-story{
-  width:100%;
-  min-height: 55vh;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(229,9,20,.18), transparent 55%),
-    linear-gradient(to bottom, rgba(20,20,20,1), rgba(20,20,20,.8), rgba(20,20,20,1));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  margin-bottom: 20px;
-}
-
-#header-story .header-text p{
-  font-family: "Georgia", serif;
-  color: rgba(255,255,255,.65);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.header-text h1,
-.header-text h1 span{
-  font-family: "Georgia","Times New Roman",serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--red);
-  font-size: 80px;
-  letter-spacing: -2px;
-  line-height: 1;
-  text-shadow: none;
-  margin-top: 10px;
-}
-
-/* small bounce for arrow */
-@keyframes bounce{
-  0%, 100%{ transform: translateY(0); }
-  50%{ transform: translateY(10px); }
-}
-
-/* --- Divider --- */
-.season-divider{
-  width:100%;
-  height:1px;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,.22), transparent);
-  margin: 60px 0;
-  opacity:.6;
-}
-
-/* --- 7) SECTIONS COMMON --- */
-.container{
-  padding: 80px 10%;
-  max-width: 1200px;   /* center all sections */
-  margin: 0 auto;
-}
-
-.sub-title{
-  font-size: 36px;
-  font-weight: 700;
-  color:#fff;
-  margin-bottom: 30px;
-  border-left: 5px solid var(--red);
-  padding-left: 15px;
-}
-
-.story-text{
-  font-size: 18px;
-  line-height: 1.8;
-  color: rgba(255,255,255,.78);
-  max-width: 1000px;
-}
-
-/* --- 8) SEASON 1 CHAPTER CARDS --- */
-.chapter{
-  margin-bottom: 60px;
-  padding: 40px;
-  gap: 40px;
-  border-left: 3px solid rgba(255,255,255,.12);
-  background: linear-gradient(to right, rgba(255,255,255,.03), transparent);
-  border-radius: 10px;
-  cursor:pointer;
-  border: 1px solid transparent;
-  transition: all .25s ease;
-  display:flex;
-  align-items:center;
-  margin-left:auto;
-  margin-right:0;
-  max-width: 95%;
-}
-
-.chapter:hover{
-  border-left: 3px solid var(--red);
-  background: rgba(255,255,255,.05);
-  transform: scale(1.01);
-}
-
+/* Chapter Cards */
+.chapter{ margin-bottom: 60px; padding: 40px; gap: 40px; border-left: 3px solid rgba(255,255,255,.12); background: linear-gradient(to right, rgba(255,255,255,.03), transparent); border-radius: 10px; cursor:pointer; border: 1px solid transparent; transition: all .25s ease; display:flex; align-items:center; margin-left:auto; margin-right:0; max-width: 95%; }
+.chapter:hover{ border-left: 3px solid var(--red); background: rgba(255,255,255,.05); transform: scale(1.01); }
 .chapter-content{ flex:1; }
-.chapter-title{
-  font-size: 24px;
-  color: var(--red);
-  font-weight: 800;
-  margin-bottom: 10px;
-}
+.chapter-title{ font-size: 24px; color: var(--red); font-weight: 800; margin-bottom: 10px; }
+.chapter-date{ font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 15px; display:block; font-style: italic; }
+.chapter-thumb{ flex: 0 0 300px; width: 300px; aspect-ratio: 16/9; border-radius: 8px; overflow:hidden; }
+.chapter-thumb img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+.chapter:hover .chapter-thumb img{ transform: scale(1.08); }
 
-.chapter-date{
-  font-size: 14px;
-  color: rgba(255,255,255,.5);
-  margin-bottom: 15px;
-  display:block;
-  font-style: italic;
-}
-
-.chapter-thumb{
-  flex: 0 0 300px;
-  width: 300px;
-  aspect-ratio: 16/9;
-  border-radius: 8px;
-  overflow:hidden;
-}
-.chapter-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition: transform .5s ease, filter .5s ease;
-}
-.chapter:hover .chapter-thumb img{
-  transform: scale(1.08);
-  filter: brightness(1.05);
-}
-
-/* --- 9) HOBBIES --- */
-.hobby-list{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.hobby-card{
-  position:relative;
-  border-radius: 10px;
-  overflow:hidden;
-  height: 180px;
-  cursor:pointer;
-  transition: transform .25s ease;
-}
-.hobby-card:hover{ transform: translateY(-2px); }
-
-.hobby-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter: brightness(.6);
-  transform: scale(1.03);
-}
-
-.hobby-text{
-  position:absolute;
-  bottom: 15px;
-  left: 15px;
-  color:#fff;
-  font-weight: 900;
-  font-size: 20px;
-  text-shadow: 0 4px 12px rgba(0,0,0,.8);
-}
-
-/* --- 10) MOVIES GRID --- */
-.movie-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-}
-
-.movie-poster{
-  border-radius: 8px;
-  overflow:hidden;
-  cursor:pointer;
-  position:relative;
-  aspect-ratio: 2/3;
-  transition: transform .25s ease;
-}
-.movie-poster img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.movie-poster:hover{
-  transform: scale(1.07);
-  z-index:5;
-}
-
-.poster-overlay{
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,.7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transition: .25s ease;
-}
+/* Other Elements */
+.hobby-card, .movie-poster{ position:relative; border-radius: 10px; overflow:hidden; cursor:pointer; transition: transform .25s ease; }
+.hobby-card{ height: 180px; }
+.movie-poster{ aspect-ratio: 2/3; }
+.hobby-card:hover, .movie-poster:hover{ transform: translateY(-2px); }
+.hobby-card img, .movie-poster img{ width:100%; height:100%; object-fit:cover; }
+.hobby-text{ position:absolute; bottom: 15px; left: 15px; color:#fff; font-weight: 900; font-size: 20px; text-shadow: 0 4px 12px rgba(0,0,0,.8); }
+.poster-overlay{ position:absolute; inset:0; background: rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; opacity:0; transition: .25s ease; }
 .movie-poster:hover .poster-overlay{ opacity:1; }
 .poster-overlay i{ font-size: 40px; color: var(--red); }
 
-/* --- 11) ENDING / CONTACT --- */
-.ending{
-  text-align:center;
-  padding: 100px 0;
-  background:#000;
-  color: rgba(255,255,255,.5);
-  border-top: 1px solid rgba(255,255,255,.12);
-}
-
-.contact-icons i{
-  font-size: 40px;
-  margin: 0 20px;
-  color:#fff;
-  transition: .25s ease;
-  cursor:pointer;
-}
-.contact-icons i:hover{
-  color: var(--red);
-  transform: scale(1.15);
-}
-
-/* --- 12) MUSIC PLAYER HELPERS (used by Tailwind section) --- */
-/* Disc spin */
-@keyframes spin { to { transform: rotate(360deg); } }
-.spin-slow { animation: spin 3s linear infinite; }
-
-/* Custom range style for Season4 seek bar */
-.np-range{
-  -webkit-appearance:none;
-  appearance:none;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.18);
-  outline:none;
-}
-.np-range::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  appearance:none;
-  width:14px;
-  height:14px;
-  border-radius:999px;
-  background:#fff;
-  border:2px solid rgba(255,255,255,.35);
-  cursor:pointer;
-}
-.np-range::-moz-range-thumb{
-  width:14px;
-  height:14px;
-  border-radius:999px;
-  background:#fff;
-  border:2px solid rgba(255,255,255,.35);
-  cursor:pointer;
-}
-
-/* --- 13) RESPONSIVE --- */
-@media (max-width: 768px){
-  .chapter{
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    max-width: 100%;
-    padding: 22px;
-    gap: 18px;
-  }
-  .chapter-thumb{
-    width:100%;
-    flex: 0 0 auto;
-  }
-  .netflix-logo-anim{ font-size: 40px; }
-  .header-text h1{ font-size: 54px; }
-  nav .logo{ font-size: 22px; }
-  nav ul li{ margin: 10px 8px; }
-  nav ul li a{ font-size: 12px; }
-}
-
-/* super small */
-@media (max-width: 420px){
-  .container{ padding: 70px 6%; }
-  .sub-title{ font-size: 30px; }
-}
-/* YouTube audio-only mount (DON'T use display:none) */
-.yt-audio-only{
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  left: -9999px;
-  top: -9999px;
+/* =========================================
+   SEASON 3: MOVIE CARD SLIDER (FIXED)
+========================================= */
+.card-movie-wrapper {
+  box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.5);
+  height: 440px;
+  width: 100%; max-width: 840px; 
+  position: relative;
+  border-radius: 10px;
   overflow: hidden;
+  background: #000;
+  margin: 0 auto;
+}
+
+.card-movie-carousel {
+  transition: all 0.25s ease-in-out;
+  height: 100%; width: 100%;
+  position: absolute; bottom: 0; right: 0;
+  overflow: hidden;
+}
+
+/* Hover Wrapper to Shrink Carousel (Show Controls) */
+.card-movie-wrapper:hover .card-movie-carousel {
+  bottom: 60px; right: 40px;
+  width: calc(100% - 40px); height: calc(100% - 60px);
+}
+
+/* NAVIGATION (FIXED: TRANSPARENT BG) */
+.card-movie-navigation {
+  background-color: transparent; /* ทำให้พื้นหลังใส จะได้เห็นรูปหนัง */
+  bottom: 0; height: 100%; overflow: hidden;
+  position: absolute; right: 0; width: 100%;
+  z-index: 50; 
+  pointer-events: none; 
+}
+
+.card-movie-navigation__list {
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%); width: 18px; list-style: none;
+  pointer-events: auto;
+}
+.card-movie-navigation__list li {
+  background-color: #ccc; border-radius: 100%; cursor: pointer;
+  height: 12px; margin: 0 auto 6px; width: 12px; transition: all 0.25s;
+}
+.card-movie-navigation__list li.is-active { height: 18px; width: 18px; background-color: var(--red); }
+.card-movie-navigation__list li:hover { background-color: #bbb; }
+
+/* PLAY BUTTON TRAILER */
+.card-movie-btn-play {
+  -webkit-appearance: none; background-color: transparent; border: none;
+  bottom: 0; color: #333; cursor: pointer; font-size: 14px; font-weight: bold;
+  line-height: 60px; margin: 0; outline: none; padding: 0;
+  position: absolute; right: 40px; transition: all 0.25s;
+  pointer-events: auto;
+}
+.card-movie-btn-play:before { content: 'Watch Trailer'; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+.card-movie-btn-play:after {
+  content: ''; border-bottom: 6px solid transparent; border-left: 6px solid #333;
+  border-top: 6px solid transparent; height: 0; margin-right: 6px;
+  position: absolute; right: 100%; top: 50%; transform: translateY(-50%); width: 0;
+}
+.card-movie-btn-play.is-playing:before { content: 'Hide Trailer'; }
+.card-movie-btn-play.is-playing:after { transform: rotate(-90deg); margin-top: -6px; }
+
+/* MOVIE CARD */
+.card-movie {
+  transition: all 0.5s ease-in-out; background-size: cover; background-position: center;
+  bottom: 0; height: 100%; overflow: hidden; position: absolute;
+  right: 0; opacity: 0; width: 100%; z-index: 20;
+}
+.card-movie--active { opacity: 1; z-index: 25; }
+
+/* HOVER CHANGE COLOR */
+.card-movie-wrapper:hover .card-movie__title {
+    color: var(--red);
+    text-shadow: 2px 2px 0px #fff;
+    transition: 0.3s;
+}
+
+.card-movie__content {
+  position: absolute; top: 100px; left: 50px; max-width: 400px;
+  color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+.card-movie__title {
+  font-size: 50px; font-weight: 800; line-height: 1; margin-bottom: 15px;
+  text-transform: uppercase; transition: color 0.3s ease;
+}
+.card-movie__details { margin-bottom: 20px; font-weight: 600; }
+.card-movie__details-item { display: inline-block; margin-right: 20px; }
+.card-movie__details-list { display: inline-block; list-style: none; padding: 0; }
+.card-movie__details-list li { display: inline-block; margin-right: 5px; padding-right: 6px; border-right: 1px solid rgba(255,255,255,0.5); }
+.card-movie__details-list li:last-child { border: none; }
+.card-movie__description { font-size: 14px; line-height: 1.6; }
+.card-movie__rating {
+  position: absolute; bottom: 20px; right: 20px; width: 60px; height: 60px;
+  border-radius: 50%; border: 3px solid var(--red); display: flex;
+  align-items: center; justify-content: center; font-size: 20px; font-weight: 800;
+  background: rgba(0,0,0,0.7); color: #fff;
+}
+
+/* Video Player */
+.card-movie__player {
+  transition: all 0.5s ease-in-out; transform: translate(-50%, -50%);
+  height: 0; left: 50%; position: absolute; top: 50%; width: 0;
+  z-index: 20; background: black;
+}
+.card-movie--playing .card-movie__player { height: 100%; width: 100%; }
+.card-movie__player iframe { height: 100%; width: 100%; border: none; }
+
+/* Footer */
+.ending{ text-align:center; padding: 100px 0; background:#000; color: rgba(255,255,255,.5); border-top: 1px solid rgba(255,255,255,.12); }
+.contact-icons i{ font-size: 40px; margin: 0 20px; cursor:pointer; transition:.25s; }
+.contact-icons i:hover{ color: var(--red); transform: scale(1.15); }
+
+/* Music Player Special */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 4s linear infinite; }
+.np-range { -webkit-appearance:none; height:6px; background:rgba(255,255,255,.2); border-radius:99px; outline:none; cursor:pointer; }
+.np-range::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; background:#fff; border-radius:50%; cursor:pointer; }
+
+/* Responsive */
+@media (max-width: 768px){
+  .chapter{ flex-direction:column-reverse; align-items:flex-start; }
+  .chapter-thumb{ width:100%; }
+  .header-text h1{ font-size:50px; }
+  .hobby-list { grid-template-columns: repeat(1, 1fr); }
+  
+  /* Responsive Movie Slider */
+  .card-movie-wrapper { height: 600px; }
+  .card-movie-wrapper:hover .card-movie-carousel { bottom: 0; right: 0; width: 100%; height: 100%; }
+  .card-movie-navigation { display: none; }
+  .card-movie__content { top: 50px; left: 20px; }
+  .card-movie__title { font-size: 36px; }
 }

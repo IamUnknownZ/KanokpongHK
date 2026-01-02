@@ -1,23 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  initIntroGate();       // index.html intro -> profile gate
-  initProfileGateLinks();// index.html click profiles -> home.html
-  initScrollReveal();    // home.html reveal animation
-  initNavbarScroll();    // home.html navbar background on scroll
-  initLogoScrollTop();   // home.html logo click to top
+  initIntroGate();
+  initProfileGateLinks();
+  initScrollReveal();
+  initNavbarScroll();
+  initLogoScrollTop();
+  initCopyTitle();
 });
 
 /* =========================
-   INDEX: INTRO -> PROFILE GATE
+   INDEX & NAV LOGIC
 ========================= */
 function initIntroGate() {
   const intro = document.getElementById("intro-animation");
   const gate = document.getElementById("profile-gate");
   if (!intro || !gate) return;
 
-  // ให้แน่ใจว่า gate ซ่อนไว้ก่อน
   gate.classList.add("hidden");
-
-  // ให้ตรงกับความยาว animation ใน CSS (3s) เผื่อ buffer
   setTimeout(() => {
     intro.classList.add("fade-out");
     setTimeout(() => {
@@ -28,74 +26,236 @@ function initIntroGate() {
   }, 2800);
 }
 
-/* =========================
-   INDEX: CLICK PROFILE -> HOME
-========================= */
 function initProfileGateLinks() {
   const dev = document.getElementById("profileDev");
-  const teacher = document.getElementById("profileTeacher");
-
-  if (!dev && !teacher) return; // not on index
-
   const goHome = () => {
     const gate = document.getElementById("profile-gate");
-    if (gate) gate.classList.add("fade-out");
-    setTimeout(() => {
-      window.location.href = "home.html";
-    }, 450);
+    if(gate) gate.classList.add("fade-out");
+    setTimeout(() => window.location.href = "home.html", 450);
   };
-
-  dev?.addEventListener("click", goHome);
-  teacher?.addEventListener("click", goHome);
-
-  // เผื่อกด Enter/Space (accessibility)
-  dev?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") goHome();
-  });
-  teacher?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") goHome();
-  });
+  if(dev) dev.addEventListener("click", goHome);
 }
 
-/* =========================
-   HOME: SCROLL REVEAL (เหมือนเดิม)
-========================= */
 function initScrollReveal() {
   const hiddenElements = document.querySelectorAll(".reveal");
   if (!hiddenElements.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("active");
-        // ถ้าอยากให้เลื่อนกลับแล้วซ่อนอีกครั้ง ให้เปิดบรรทัดล่าง
-        // else entry.target.classList.remove("active");
-      });
-    },
-    { threshold: 0.12 }
-  );
-
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("active");
+    });
+  }, { threshold: 0.12 });
   hiddenElements.forEach((el) => observer.observe(el));
 }
 
-/* =========================
-   HOME: NAVBAR EFFECT
-========================= */
 function initNavbarScroll() {
   const navbar = document.querySelector("nav");
   if (!navbar) return;
-
   const onScroll = () => {
     if (window.scrollY > 50) navbar.classList.add("scrolled");
     else navbar.classList.remove("scrolled");
   };
-
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 }
 
 function initLogoScrollTop() {
-  const logo = document.getElementById("logoTop") || document.querySelector(".logo");
+  const logo = document.getElementById("logoTop");
   if (!logo) return;
   logo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
+
+function initCopyTitle() {
+  const btn = document.getElementById("copyTitleBtn");
+  if(!btn) return;
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText("NAN CHUN - SE SO NEON");
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+    setTimeout(() => btn.innerHTML = originalContent, 2000);
+  });
+}
+
+/* =========================
+   YOUTUBE PLAYERS (Music + Movie Slider)
+========================= */
+var player;
+var isPlaying = false;
+var updateInterval;
+var moviePlayers = [];
+var currentMovie = 0;
+
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Global YouTube Ready Function
+window.onYouTubeIframeAPIReady = function() {
+  
+  // 1. Setup Music Player (Season 4)
+  if (document.getElementById('yt-nan-player')) {
+    player = new YT.Player('yt-nan-player', {
+      height: '0', 
+      width: '0',
+      videoId: 'A5ZWtVZafIs', 
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  // 2. Setup Movie Slider (Season 3)
+  if (typeof $ !== 'undefined') { // Check jQuery for slider
+      $('[data-trailer]').each(function(index) {
+          var id = $(this).data('trailer');
+          $(this).html('<iframe id="movie_player_' + index + '" src="https://www.youtube.com/embed/' + id + '?enablejsapi=1&showinfo=0&rel=0&controls=1" allowfullscreen></iframe>');
+          
+          var p = new YT.Player('movie_player_' + index, {
+              events: {
+                  'onStateChange': function(e) {
+                      if (e.data === YT.PlayerState.ENDED) {
+                          resetMoviePlayer();
+                      }
+                  }
+              }
+          });
+          moviePlayers.push(p);
+      });
+  }
+}
+
+// --- Music Player Logic ---
+function onPlayerReady(event) {
+  const btnPlay = document.getElementById("npPlay");
+  const btnStop = document.getElementById("npStop");
+  const seek = document.getElementById("npSeek");
+
+  btnPlay.addEventListener("click", () => {
+    if(!player) return;
+    if(isPlaying) player.pauseVideo();
+    else player.playVideo();
+  });
+
+  btnStop.addEventListener("click", () => {
+    if(player) {
+      player.pauseVideo();
+      player.seekTo(0);
+    }
+    isPlaying = false;
+    updateUI(false);
+    stopLoop();
+    seek.value = 0;
+    document.getElementById("npCurrent").innerText = "0:00";
+  });
+
+  seek.addEventListener("input", function() {
+    const duration = player.getDuration();
+    if (duration) {
+      const seekTo = duration * (this.value / 100);
+      player.seekTo(seekTo, true);
+    }
+  });
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    isPlaying = true;
+    updateUI(true);
+    startLoop();
+  } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+    isPlaying = false;
+    updateUI(false);
+    stopLoop();
+    if(event.data == YT.PlayerState.ENDED) document.getElementById("npSeek").value = 0;
+  }
+}
+
+function updateUI(playing) {
+  const icon = document.getElementById("npPlayIcon");
+  const text = document.getElementById("npPlayText");
+  const disc = document.getElementById("npDisc");
+  const status = document.getElementById("npStatus");
+
+  if(playing) {
+    icon.className = "fa-solid fa-pause";
+    text.innerText = "Pause";
+    disc.classList.add("spin-slow");
+    status.innerText = "Playing...";
+  } else {
+    icon.className = "fa-solid fa-play";
+    text.innerText = "Play";
+    disc.classList.remove("spin-slow");
+    status.innerText = "";
+  }
+}
+
+function startLoop() {
+  stopLoop();
+  updateInterval = setInterval(() => {
+    if(!player || !player.getDuration) return;
+    const ct = player.getCurrentTime();
+    const dur = player.getDuration();
+    if(dur > 0) {
+      document.getElementById("npSeek").value = (ct / dur) * 100;
+      document.getElementById("npCurrent").innerText = fmtTime(ct);
+      document.getElementById("npDuration").innerText = fmtTime(dur);
+    }
+  }, 1000);
+}
+
+function stopLoop() {
+  clearInterval(updateInterval);
+}
+
+function fmtTime(s) {
+  const m = Math.floor(s / 60);
+  const sc = Math.floor(s % 60);
+  return m + ":" + (sc < 10 ? "0"+sc : sc);
+}
+
+// --- Movie Slider Logic (jQuery) ---
+$(function() {
+    // Play Trailer Button
+    $('[data-play]').on('click', function() {
+        var $card = $('.card-movie--active');
+        var idx = $card.index();
+        var currentPlayer = moviePlayers[idx];
+
+        if ($card.hasClass('card-movie--playing')) {
+            $(this).removeClass('is-playing');
+            $card.removeClass('card-movie--playing');
+            if(currentPlayer && typeof currentPlayer.pauseVideo === 'function') currentPlayer.pauseVideo();
+        } else {
+            $(this).addClass('is-playing');
+            $card.addClass('card-movie--playing');
+            if(currentPlayer && typeof currentPlayer.playVideo === 'function') currentPlayer.playVideo();
+        }
+    });
+
+    // Navigation Dots
+    $('[data-navigation] li').on('click', function() {
+        var newIndex = $(this).index();
+        if(newIndex === currentMovie) return;
+
+        resetMoviePlayer(); // Stop current video
+
+        currentMovie = newIndex;
+        $('[data-navigation] li').removeClass('is-active').eq(newIndex).addClass('is-active');
+        $('.card-movie').removeClass('card-movie--active').eq(newIndex).addClass('card-movie--active');
+    });
+
+    // Helper to stop video inside slider
+    window.resetMoviePlayer = function() {
+        var $card = $('.card-movie--active');
+        var idx = $card.index();
+        var currentPlayer = moviePlayers[idx];
+
+        $card.removeClass('card-movie--playing');
+        $('[data-play]').removeClass('is-playing');
+        
+        if(currentPlayer && typeof currentPlayer.stopVideo === 'function') {
+            currentPlayer.stopVideo(); // Stop trailer
+        }
+    }
+});

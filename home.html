@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BASFLIX - A Boy's Story</title>
-
-  <!-- Tailwind (ถ้าคุณมี build tailwind อยู่แล้ว ให้ลบอันนี้) -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-[#141414] text-white overflow-x-hidden">
@@ -26,7 +24,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <div id="dashboard" class="fade-in" style="background: url('./img/boy welcome.png') center/cover no-repeat;">
     <div class="dashboard-content">
       <div style="max-width: 600px; padding-top: 60px;">
@@ -56,7 +53,6 @@
       </div>
     </div>
 
-    <!-- SEASON 1 -->
     <div id="season1" class="container">
       <h1 class="sub-title reveal">Season 1: Origins</h1>
       <div class="story-text">
@@ -82,97 +78,183 @@
 
     <div class="season-divider"></div>
 
-    <!-- SEASON 2 -->
     <div id="season2" class="container">
       <h1 class="sub-title reveal">Season 2: The Hobbies</h1>
       <p class="reveal" style="color:#aaa; margin-bottom:20px;">What keeps me going when I'm not coding.</p>
-      <div class="hobby-list">
-        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200"><div class="hobby-text">Listening to Music</div></div>
-        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200"><div class="hobby-text">Watching Netflix</div></div>
-        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200"><div class="hobby-text">Going to Theater</div></div>
-        <div class="hobby-card reveal"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200"><div class="hobby-text">Exploring Tech</div></div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal">
+        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200"><div class="hobby-text">Listening to Music</div></div>
+        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200"><div class="hobby-text">Watching Netflix</div></div>
+        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200"><div class="hobby-text">Going to Theater</div></div>
+        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200"><div class="hobby-text">Exploring Tech</div></div>
       </div>
     </div>
 
     <div class="season-divider"></div>
 
-    <!-- SEASON 3 -->
-    <div id="season3" class="container">
-      <h1 class="sub-title reveal">Season 3: Back to the Theater</h1>
-      <p class="reveal" style="color:#aaa; margin-bottom:20px;">My Top 5 Favorite Movies.</p>
-      <div class="movie-grid">
-        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
-        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
-        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
-        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
-        <div class="movie-poster reveal"><img src="https://m.media-amazon.com/images/M/MV5BODRmZDVmNzUtZDA4ZC00NjhkLWI2M2UtN2M0ZDIzNDcxYThjL2ltYWdlXkEyXkFqcGdeQXVyNTk0MzMzODA@._V1_.jpg"><div class="poster-overlay"><i class="fa-solid fa-play"></i></div></div>
-      </div>
+    <div id="season3" class="container" style="position: relative; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        
+        <h1 class="sub-title reveal" style="align-self: flex-start;">Season 3: Back to the theater</h1>
+
+        <div class="card-movie-wrapper reveal">
+          
+          <div class="card-movie-carousel">
+            
+            <div class="card-movie card-movie--active" style="background-image: url('https://img.youtube.com/vi/zSWdZVtXT7E/maxresdefault.jpg');">
+              <div class="card-movie__content">
+                <div class="card-movie__title">Interstellar</div>
+                <div class="card-movie__details">
+                  <span class="card-movie__details-item">2014</span>
+                  <span class="card-movie__details-item">169 mins</span>
+                  <ul class="card-movie__details-item card-movie__details-list">
+                    <li>Sci-Fi</li>
+                    <li>Adventure</li>
+                    <li>Drama</li>
+                  </ul>
+                </div>
+                <div class="card-movie__description">
+                  <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+                </div>
+              </div>
+              <div class="card-movie__rating">8.7</div>
+              <div class="card-movie__player" data-trailer="zSWdZVtXT7E"></div>
+            </div>
+
+            <div class="card-movie" style="background-image: url('https://img.youtube.com/vi/0nyYX8s3klo/maxresdefault.jpg');">
+              <div class="card-movie__content">
+                <div class="card-movie__title">Incendies</div>
+                <div class="card-movie__details">
+                  <span class="card-movie__details-item">2010</span>
+                  <span class="card-movie__details-item">131 mins</span>
+                  <ul class="card-movie__details-item card-movie__details-list">
+                    <li>Drama</li>
+                    <li>Mystery</li>
+                    <li>War</li>
+                  </ul>
+                </div>
+                <div class="card-movie__description">
+                  <p>Twins journey to the Middle East to discover their family history and fulfill their mother's last wishes.</p>
+                </div>
+              </div>
+              <div class="card-movie__rating">8.3</div>
+              <div class="card-movie__player" data-trailer="0nyYX8s3klo"></div>
+            </div>
+
+            <div class="card-movie" style="background-image: url('https://img.youtube.com/vi/voBxLJ6t2mk/maxresdefault.jpg');">
+              <div class="card-movie__content">
+                <div class="card-movie__title">Superman</div>
+                <div class="card-movie__details">
+                  <span class="card-movie__details-item">2025</span>
+                  <span class="card-movie__details-item">135 mins</span>
+                  <ul class="card-movie__details-item card-movie__details-list">
+                    <li>Action</li>
+                    <li>Sci-Fi</li>
+                    <li>Adventure</li>
+                  </ul>
+                </div>
+                <div class="card-movie__description">
+                  <p>Clark Kent balances his Kryptonian heritage with his human upbringing in this reboot by James Gunn.</p>
+                </div>
+              </div>
+              <div class="card-movie__rating">TBA</div>
+              <div class="card-movie__player" data-trailer="voBxLJ6t2mk"></div>
+            </div>
+
+            <div class="card-movie" style="background-image: url('https://img.youtube.com/vi/05avxcNpFls/maxresdefault.jpg');">
+              <div class="card-movie__content">
+                <div class="card-movie__title">One Battle After Another</div>
+                <div class="card-movie__details">
+                  <span class="card-movie__details-item">2025</span>
+                  <span class="card-movie__details-item">145 mins</span>
+                  <ul class="card-movie__details-item card-movie__details-list">
+                    <li>Thriller</li>
+                    <li>Action</li>
+                    <li>Drama</li>
+                  </ul>
+                </div>
+                <div class="card-movie__description">
+                  <p>An ex-revolutionary is forced back into his former combative lifestyle when he and his daughter are pursued.</p>
+                </div>
+              </div>
+              <div class="card-movie__rating">7.9</div>
+              <div class="card-movie__player" data-trailer="05avxcNpFls"></div>
+            </div>
+
+            <div class="card-movie" style="background-image: url('https://img.youtube.com/vi/uYPbbksJxIg/maxresdefault.jpg');">
+              <div class="card-movie__content">
+                <div class="card-movie__title">Oppenheimer</div>
+                <div class="card-movie__details">
+                  <span class="card-movie__details-item">2023</span>
+                  <span class="card-movie__details-item">180 mins</span>
+                  <ul class="card-movie__details-item card-movie__details-list">
+                    <li>Biopic</li>
+                    <li>Drama</li>
+                    <li>History</li>
+                  </ul>
+                </div>
+                <div class="card-movie__description">
+                  <p>The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.</p>
+                </div>
+              </div>
+              <div class="card-movie__rating">8.4</div>
+              <div class="card-movie__player" data-trailer="uYPbbksJxIg"></div>
+            </div>
+
+          </div>
+          <div class="card-movie-navigation">
+            <ul class="card-movie-navigation__list" data-navigation>
+              <li class="is-active"></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+            <button type="button" data-play class="card-movie-btn-play"></button>
+          </div>
+
+        </div>
     </div>
 
     <div class="season-divider"></div>
 
-    <!-- =========================
-         SEASON 4 (NEW)
-         Left = Player, Right = Favorite Card
-    ========================== -->
     <div id="season4" class="container">
       <h1 class="sub-title reveal">Season 4: Pump up the Volume</h1>
       <p class="reveal text-white/60 mb-6">One track that matches my mood the most.</p>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start reveal">
 
-        <!-- LEFT: PLAYER -->
         <div class="rounded-2xl border border-white/10 bg-black/40 shadow-[0_25px_70px_rgba(0,0,0,0.55)] overflow-hidden">
           <div class="p-6 flex flex-col gap-5">
 
-            <!-- Top row -->
             <div class="flex items-center gap-5">
-              <!-- Disc -->
               <div class="relative w-24 h-24 shrink-0">
                 <img
                   id="npDisc"
                   src="./img/nanchun.jpg"
                   onerror="this.src='https://img.youtube.com/vi/A5ZWtVZafIs/hqdefault.jpg';"
-                  alt="NAN CHUN cover"
-                  class="w-24 h-24 rounded-full object-cover ring-4 ring-zinc-700/60 shadow-md"
+                  class="w-24 h-24 rounded-full object-cover ring-4 ring-zinc-700/60 shadow-md transition-transform duration-[4000ms] linear"
                 />
                 <div class="absolute inset-0 rounded-full ring-1 ring-white/10"></div>
                 <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-zinc-900 ring-4 ring-zinc-300/70"></div>
               </div>
-
-              <!-- Song info -->
               <div class="min-w-0">
                 <p class="text-xs font-black tracking-[0.2em] text-white/60 uppercase">Now Playing</p>
                 <h3 class="text-3xl font-extrabold leading-tight">NAN CHUN</h3>
                 <p class="text-sm font-bold text-[#E50914]">SE SO NEON</p>
-
                 <div class="mt-3 flex flex-wrap gap-2">
                   <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
                   <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
-                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Late Night Mood</span>
                 </div>
               </div>
             </div>
 
-            <!-- Seek bar -->
             <div class="flex items-center gap-3">
               <span id="npCurrent" class="text-xs text-white/60 tabular-nums w-10">0:00</span>
-
-              <input
-                id="npSeek"
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                class="np-range w-full"
-                aria-label="Seek"
-              />
-
+              <input id="npSeek" type="range" min="0" max="100" value="0" class="np-range w-full" />
               <span id="npDuration" class="text-xs text-white/60 tabular-nums w-10 text-right">0:00</span>
             </div>
 
-            <!-- Controls -->
-            <div class="flex flex-wrap gap-3">
+            <div class="flex gap-3">
               <button
                 id="npPlay"
                 type="button"
@@ -187,57 +269,29 @@
                 type="button"
                 class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition"
               >
-                <i class="fa-solid fa-stop"></i>
-                Stop
+                <i class="fa-solid fa-stop"></i> Stop
               </button>
-
-              <a
-                id="npOpenYT"
-                href="https://www.youtube.com/watch?v=A5ZWtVZafIs"
-                target="_blank" rel="noopener"
-                class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition inline-flex items-center justify-center gap-2"
-              >
-                <i class="fa-brands fa-youtube text-[#E50914]"></i>
-                YouTube
-              </a>
             </div>
 
             <p id="npStatus" class="text-xs text-[#E50914] font-bold min-h-[16px]"></p>
           </div>
 
-          <!-- Hidden YouTube mount -->
-          <div id="yt-nan-player" class="yt-audio-only"></div>
+          <div id="yt-nan-player" class="hidden"></div>
         </div>
 
-        <!-- RIGHT: FAVORITE CARD (แบบรูปที่คุณส่ง) -->
-        <section class="rounded-2xl border border-white/10 bg-black/40 shadow-[0_25px_70px_rgba(0,0,0,0.55)] overflow-hidden">
+        <section class="rounded-2xl border border-white/10 bg-black/40 shadow-[0_25px_70px_rgba(0,0,0,0.55)] overflow-hidden h-full flex flex-col justify-center">
           <div class="p-8">
             <p class="text-xs font-black tracking-[0.25em] text-white/60 uppercase">MY FAVORITE SONG</p>
             <h2 class="text-5xl font-extrabold mt-3 leading-none">NAN CHUN</h2>
             <p class="text-sm font-extrabold text-[#E50914] mt-3">SE SO NEON</p>
 
-            <div class="mt-5 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
-              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
-              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Late Night Mood</span>
-            </div>
-
             <p class="mt-6 text-sm leading-7 text-white/80">
-              เพลงนี้เป็นเพลงโปรดของผม เพราะผมได้ยินมันครั้งแรกจากศิลปินคนหนึ่งที่ผมชื่นชอบ
-              เขาร้องโคเวอร์ไว้ ถึงแม้ผมจะฟังไม่ออกทุกคำ แต่ความรู้สึกมัน “กินใจ” แบบสุดๆ
-              น้ำเสียงที่แหบและแสบซ่าน บวกกับการเอื้อนที่พอดี… มันเข้ากับมู้ดของผมมากๆ
-              เหมือนเพลงพูดแทนความรู้สึกที่อธิบายเป็นคำไม่ค่อยได้
+                "This track holds a special place in my playlist. I first heard it covered by an artist I admire. 
+                Even though I don't understand every word, the raw emotion in the raspy vocals hits deep. 
+                It captures a specific late-night mood that words just can't explain."
             </p>
 
-            <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a
-                href="https://www.youtube.com/watch?v=A5ZWtVZafIs"
-                target="_blank" rel="noopener"
-                class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-black font-extrabold hover:brightness-95 transition"
-              >
-                <i class="fa-solid fa-play"></i> Play on YouTube
-              </a>
-
+            <div class="mt-7">
               <button
                 id="copyTitleBtn"
                 type="button"
@@ -248,7 +302,7 @@
             </div>
 
             <div class="mt-6 pt-6 border-t border-white/10 text-white/50 text-xs italic">
-              “Even if I don't understand every word, I still feel everything.”
+              “Music is the language of the spirit.”
             </div>
           </div>
         </section>
@@ -258,7 +312,6 @@
 
     <div class="season-divider"></div>
 
-    <!-- SEASON 5 -->
     <div id="season5" class="ending reveal">
       <h1 style="color: #E50914; font-size: 50px; margin-bottom: 20px;">SEASON 5</h1>
       <h2 style="color: white; font-size: 30px; margin-bottom: 40px;">Catch Me If You Can</h2>
