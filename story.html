@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watching: Boy's Story</title>
+    <title>Watching: A Boy's Story</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="fade-in">
 
     <nav>
-        <div class="logo">NETFLIX</div>
+        <div class="logo">BASFLIX</div>
         <ul>
-            <li><a href="index.html">HOME</a></li> <li><a href="#origins">ORIGINS</a></li>
+            <li><a href="home.html">HOME</a></li> 
+            <li><a href="#origins">ORIGINS</a></li>
             <li><a href="#portfolio">MISSIONS</a></li>
             <li><a href="#contact">CREDITS</a></li>
         </ul>
@@ -21,7 +22,7 @@
     <div id="header">
         <div class="header-text">
             <p>Based on a True Story</p>
-            <h1>Boy's <span>Story</span></h1>
+            <h1>A Boy's <span>Story</span></h1>
             <div style="margin-top: 50px; animation: bounce 2s infinite;">
                 <i class="fa-solid fa-chevron-down" style="font-size: 30px;"></i>
             </div>
@@ -29,22 +30,22 @@
     </div>
 
     <div id="origins" class="container">
-        <h1 class="sub-title">Chapter 1: The Origins</h1>
+        <h1 class="sub-title reveal">Chapter 1: The Origins</h1>
+        
         <div class="story-text">
-            <p>"Once upon a time... October 10th, 2005."</p>
+            <p class="reveal">"Once upon a time... October 10th, 2005."</p>
             <br>
-            <p>"A curious mind was logged in. He didn't just want to play the games... he wanted to rewrite the rules."</p>
+            <p class="reveal">"A curious mind was logged in. He didn't just want to play the games... he wanted to rewrite the rules."</p>
             <br>
-            <p style="color: #E50914; font-weight: bold;">"And so the journey began."</p>
+            <p class="reveal" style="color: #E50914; font-weight: bold;">"And so the journey began."</p>
         </div>
     </div>
 
     <div id="portfolio" class="container">
-        <h1 class="sub-title">Chapter 2: Missions</h1>
+        <h1 class="sub-title reveal">Chapter 2: Missions</h1>
         
         <div class="work-list">
-            
-            <div class="work">
+            <div class="work reveal">
                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=500">
                 <div class="layer">
                     <h3>Calculator App</h3>
@@ -52,8 +53,7 @@
                     <a href="#"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
-
-            <div class="work">
+            <div class="work reveal">
                 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500">
                 <div class="layer">
                     <h3>My Portfolio</h3>
@@ -61,8 +61,7 @@
                     <a href="#"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
-
-            <div class="work">
+            <div class="work reveal">
                 <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500">
                 <div class="layer">
                     <h3>Content Creation</h3>
@@ -70,11 +69,10 @@
                     <a href="#"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div id="contact" class="ending">
+    <div id="contact" class="ending reveal">
         <p style="letter-spacing: 5px; font-size: 12px; margin-bottom:10px;">DIRECTED BY</p>
         <h1 style="color: white; font-size: 40px;">YOUR NAME</h1>
         <div style="margin-top: 30px;">
@@ -83,5 +81,6 @@
         </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>
