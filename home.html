@@ -11,6 +11,11 @@
 </head>
 
 <body class="bg-[#141414] text-white overflow-x-hidden">
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Loader -->
   <div id="home-loader" class="home-loader">
     <div class="home-loader__inner">
       <div class="home-loader__spinner"></div>
@@ -20,6 +25,7 @@
 
   <nav>
     <div class="logo" id="logoTop">KANOKPONG</div>
+
     <ul>
       <li><a href="#season1">ORIGINS</a></li>
       <li><a href="#season2">HOBBIES</a></li>
@@ -37,7 +43,8 @@
           <span style="color:#d39b46;">IMDB 6.7</span> &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; 5 Seasons &nbsp;|&nbsp; TV Series &nbsp;|&nbsp; Exciting
         </div>
         <p style="font-size: 18px; margin-bottom: 30px;">
-          One student. One keyboard. An infinite amount of coffee. Watch the journey of how a simple design became a deployment masterpiece.
+          A story about a boy who study at KMUTNB in Technological education faculty.
+          He loves coding, movies, and music. Follow his journey as he navigates.
         </p>
         <a href="#header-story" class="btn-play">
           <i class="fa-solid fa-play"></i> Play
@@ -53,126 +60,260 @@
         <p>Based on a True Story because it's my story.</p>
         <h1>BOY'S <span>STORY</span></h1>
         <div style="margin-top: 50px; animation: bounce 2s infinite;">
-          <i class="fa-solid fa-chevron-down" style="font-size: 30px; color: #E50914;"></i>
+          <i class="fa-solid fa-chevron-down" style="font-size: 30px; color: var(--red);"></i>
         </div>
       </div>
     </div>
 
-    <!-- =========================
-         SEASON 1 (NO IMAGES)
-    ========================== -->
+    <!-- =======================
+         SEASON 1 — TIMELINE
+         (Expandable / no quote)
+    ======================== -->
     <div id="season1" class="container">
       <h1 class="sub-title reveal">Season 1: Origins</h1>
 
-      <div class="story-text">
-        <!-- Chapter 1 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2005 — I was born</span>
-            <div class="chapter-title">Chapter 1: See the world</div>
-            <p>
-              "10th October 2005, a boy is born in a big city in Thailand.
-              Little did he know, his journey into the world was about to begin."
-            </p>
-          </div>
-        </div>
+      <div class="timeline">
 
-        <!-- Chapter 2 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2018 — The Spark</span>
-            <div class="chapter-title">Chapter 2: Hello World</div>
-            <p>
-              The first time I typed “Hello, World” felt like unlocking a secret door.
-              It wasn’t about the code being perfect — it was the feeling that I could
-              create something from nothing. From that day on, I kept learning,
-              experimenting, breaking things, and trying again… because I knew this was
-              the path I wanted.
-            </p>
-          </div>
-        </div>
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 1: See the world</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
 
-        <!-- Chapter 3 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2023 — Graduation</span>
-            <div class="chapter-title">Chapter 3: Graduation 2023</div>
-            <p>
-              In 2023, I completed my compulsory education and graduated from
-              Triam Udom Suksa Pattanakarn Nonthaburi School, Science–Computer program.
-              It was a turning point — proof that I could stay consistent, learn under
-              pressure, and keep moving toward the future I wanted in tech.
-            </p>
+              <p class="tl-text">
+                "10th October 2005, a boy is born in a big city in Thailand.
+                Little did he know, his journey into the world was about to begin."
+              </p>
+            </details>
           </div>
-        </div>
+        </article>
 
-        <!-- Chapter 4 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2024 — First Real Project</span>
-            <div class="chapter-title">Chapter 4: First Real Project</div>
-            <p>
-              This was the first time I built something that felt real — not just a practice file.
-              I learned how to plan, design, and finish what I started, even when it got messy.
-            </p>
-          </div>
-        </div>
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 2: Hello World</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
 
-        <!-- Chapter 5 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">2025 — Leveling Up</span>
-            <div class="chapter-title">Chapter 5: Leveling Up</div>
-            <p>
-              I began taking my skills seriously: cleaner code, better structure, and more confidence.
-              Every mistake became a lesson, and every lesson became momentum.
-            </p>
+              <p class="tl-text">
+                The first time I typed “Hello, World” felt like unlocking a secret door.
+                It wasn’t about the code being perfect — it was the feeling that I could
+                create something from nothing. From that day on, I kept learning,
+                experimenting, breaking things, and trying again… because I knew this was
+                the path I wanted.
+              </p>
+            </details>
           </div>
-        </div>
+        </article>
 
-        <!-- Chapter 6 -->
-        <div class="chapter reveal">
-          <div class="chapter-content">
-            <span class="chapter-date">Now — The Next Episode</span>
-            <div class="chapter-title">Chapter 6: The Next Episode</div>
-            <p>
-              The story is still going. New goals, new challenges, and bigger dreams —
-              I’m ready for whatever comes next.
-            </p>
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 3: Graduation 2023</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
+
+              <p class="tl-text">
+                In 2023, I completed my compulsory education and graduated from
+                Triam Udom Suksa Pattanakarn Nonthaburi School, Science–Computer program.
+                It was a turning point — proof that I could stay consistent, learn under
+                pressure, and keep moving toward the future I wanted in tech.
+              </p>
+            </details>
           </div>
-        </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 4: First Real Project</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
+
+              <p class="tl-text">
+                This was the first time I built something that felt real — not just a practice file.
+                I learned how to plan, design, and finish what I started, even when it got messy.
+              </p>
+            </details>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 5: Leveling Up</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
+
+              <p class="tl-text">
+                I began taking my skills seriously: cleaner code, better structure, and more confidence.
+                Every mistake became a lesson, and every lesson became momentum.
+              </p>
+            </details>
+          </div>
+        </article>
+
+        <article class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <details class="tl-details">
+              <summary class="tl-summary">
+                <span class="tl-title">Chapter 6: The Next Episode</span>
+                <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
+              </summary>
+
+              <p class="tl-text">
+                The story is still going. New goals, new challenges, and bigger dreams —
+                I’m ready for whatever comes next.
+              </p>
+            </details>
+          </div>
+        </article>
+
       </div>
     </div>
 
     <div class="season-divider"></div>
 
+    <!-- =======================
+         SEASON 2 — HOBBIES
+         (Hover blur+overlay+icon + Modal)
+         (NO Filter/Tags)
+    ======================== -->
     <div id="season2" class="container">
       <h1 class="sub-title reveal">Season 2: The Hobbies</h1>
-      <p class="reveal" style="color:#aaa; margin-bottom:20px;">What keeps me going when I'm not coding.</p>
+      <p class="reveal" style="color: var(--muted); margin-bottom:20px;">What keeps me going when I'm not coding.</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal">
-        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200"><div class="hobby-text">Listening to Music</div></div>
-        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200"><div class="hobby-text">Watching Netflix</div></div>
-        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200"><div class="hobby-text">Exploring Tech</div></div>
-        <div class="hobby-card"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200"><div class="hobby-text">Going to Theater</div></div>
+
+        <button
+          type="button"
+          class="hobby-card hobby-item"
+          data-title="Listening to Music"
+          data-icon="fa-solid fa-headphones"
+          data-reason="Music keeps my focus steady. It’s like background energy when I code, and a reset button when my brain is tired."
+        >
+          <img loading="lazy" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200" alt="Listening to Music">
+          <div class="hobby-overlay">
+            <div class="hobby-overlay__icon"><i class="fa-solid fa-headphones"></i></div>
+            <div class="hobby-text">Listening to Music</div>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="hobby-card hobby-item"
+          data-title="Watching Movies"
+          data-icon="fa-solid fa-film"
+          data-reason="I love the feeling of being pulled into another world — especially on a big screen. It’s cinematic therapy for me."
+        >
+          <img loading="lazy" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200" alt="Watching Movies">
+          <div class="hobby-overlay">
+            <div class="hobby-overlay__icon"><i class="fa-solid fa-film"></i></div>
+            <div class="hobby-text">Watching Movies</div>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="hobby-card hobby-item"
+          data-title="Exploring Tech"
+          data-icon="fa-solid fa-microchip"
+          data-reason="New tech feels like new tools in a game. I like learning what’s possible, then imagining how I can build with it."
+        >
+          <img loading="lazy" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200" alt="Exploring Tech">
+          <div class="hobby-overlay">
+            <div class="hobby-overlay__icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="hobby-text">Exploring Tech</div>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="hobby-card hobby-item"
+          data-title="Going to Theater"
+          data-icon="fa-solid fa-ticket"
+          data-reason="Theater nights are my highlight days. The sound, the crowd, the scale — it makes stories feel alive."
+        >
+          <img loading="lazy" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200" alt="Going to Theater">
+          <div class="hobby-overlay">
+            <div class="hobby-overlay__icon"><i class="fa-solid fa-ticket"></i></div>
+            <div class="hobby-text">Going to Theater</div>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Hobby Modal -->
+    <div id="hobbyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="hobbyModalTitle">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__panel" role="document">
+        <button class="modal__close" type="button" aria-label="Close" data-modal-close>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="modal__head">
+          <div class="modal__icon" id="hobbyModalIcon"><i class="fa-solid fa-star"></i></div>
+          <h2 class="modal__title" id="hobbyModalTitle">Title</h2>
+        </div>
+
+        <div class="modal__body">
+          <p class="modal__label">Why I love it</p>
+          <p class="modal__text" id="hobbyModalReason"></p>
+        </div>
       </div>
     </div>
 
     <div class="season-divider"></div>
 
+    <!-- =======================
+         SEASON 3 — MOVIES
+         Auto-slide + Pause + Arrows + Swipe + Counter
+    ======================== -->
     <header class="season-head reveal s3-head">
       <h1 class="sub-title s3-title">Season 3: Back to the theater</h1>
-      <p class="sub-caption s3-caption">
-        these are the movies that hit me the hardest on the big screen.
-      </p>
+      <p class="sub-caption s3-caption">these are the movies that hit me the hardest on the big screen.</p>
     </header>
 
     <div id="season3" class="container">
-      <div class="card-movie-wrapper reveal">
+      <div class="card-movie-wrapper reveal" id="movieHero">
+
+        <!-- Controls -->
+        <div class="movie-ui" aria-label="Movie carousel controls">
+          <button id="moviePrev" class="movie-btn movie-btn--prev" type="button" aria-label="Previous movie">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="movie-meta">
+            <span id="movieCounter" class="movie-counter">01 / 05</span>
+            <button id="moviePause" class="movie-pause" type="button" aria-label="Pause autoplay">
+              <i id="moviePauseIcon" class="fa-solid fa-pause"></i>
+              <span id="moviePauseText">Pause</span>
+            </button>
+          </div>
+
+          <button id="movieNext" class="movie-btn movie-btn--next" type="button" aria-label="Next movie">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- Slides -->
         <div class="card-movie-carousel">
 
           <div class="card-movie card-movie--active"
-               style="background-image: url('./img/interstellar-9200x4320-10148.jpg');">
+            style="background-image: url('./img/interstellar-9200x4320-10148.jpg');">
             <div class="card-movie__content">
               <a class="card-movie__title" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener">Interstellar</a>
               <div class="card-movie__details">
@@ -190,9 +331,9 @@
           </div>
 
           <div class="card-movie"
-               style="background-image: url('./img/dune-part-two-movie-7680x4320-15307.jpg');">
+            style="background-image: url('./img/dune-part-two-movie-7680x4320-15307.jpg');">
             <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt15398776/" target="_blank" rel="noopener">Dune</a>
+              <a class="card-movie__title" href="https://www.imdb.com/title/tt1160419/" target="_blank" rel="noopener">Dune</a>
               <div class="card-movie__details">
                 <span class="card-movie__details-item">2021</span>
                 <span class="card-movie__details-item">155 mins</span>
@@ -208,7 +349,7 @@
           </div>
 
           <div class="card-movie"
-               style="background-image: url('./img/superman-2025-key-7680x4320-22752.jpg');">
+            style="background-image: url('./img/superman-2025-key-7680x4320-22752.jpg');">
             <div class="card-movie__content">
               <a class="card-movie__title" href="https://www.imdb.com/title/tt5950044/" target="_blank" rel="noopener">Superman</a>
               <div class="card-movie__details">
@@ -226,7 +367,7 @@
           </div>
 
           <div class="card-movie"
-               style="background-image: url('./img/one.png');">
+            style="background-image: url('./img/one.png');">
             <div class="card-movie__content">
               <a class="card-movie__title" href="https://www.imdb.com/title/tt30144839/" target="_blank" rel="noopener">One Battle After Another</a>
               <div class="card-movie__details">
@@ -237,14 +378,14 @@
                 </ul>
               </div>
               <div class="card-movie__description">
-                <p>his one is for the thrill. I like movies that keep my eyes locked on the screen — and in IMAX, every chase and every hit feels way more intense.</p>
+                <p>This one is for the thrill. I like movies that keep my eyes locked on the screen — and in IMAX, every chase and every hit feels way more intense.</p>
               </div>
             </div>
             <div class="card-movie__rating">7.9</div>
           </div>
 
           <div class="card-movie"
-               style="background-image: url('./img/oppenheimer-8k-2023-8000x4500-12220.jpg');">
+            style="background-image: url('./img/oppenheimer-8k-2023-8000x4500-12220.jpg');">
             <div class="card-movie__content">
               <a class="card-movie__title" href="https://www.imdb.com/title/tt15398776/" target="_blank" rel="noopener">Oppenheimer</a>
               <div class="card-movie__details">
@@ -262,21 +403,15 @@
           </div>
 
         </div>
-
-        <div class="card-movie-navigation">
-          <ul class="card-movie-navigation__list" data-navigation>
-            <li class="is-active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
       </div>
     </div>
 
     <div class="season-divider"></div>
 
+    <!-- =======================
+         SEASON 4 — MUSIC
+         (Volume slider + Mute)
+    ======================== -->
     <div id="season4" class="container">
       <h1 class="sub-title reveal">Season 4: Pump up the Volume</h1>
       <p class="reveal text-white/60 mb-6">One track that matches my mood the most.</p>
@@ -290,6 +425,7 @@
               <div class="relative w-24 h-24 shrink-0">
                 <img
                   id="npDisc"
+                  loading="lazy"
                   src="./img/nanchun.jpg"
                   onerror="this.src='https://img.youtube.com/vi/A5ZWtVZafIs/hqdefault.jpg';"
                   class="w-24 h-24 rounded-full object-cover ring-4 ring-zinc-700/60 shadow-md transition-transform duration-[4000ms] linear"
@@ -300,7 +436,7 @@
               <div class="min-w-0">
                 <p class="text-xs font-black tracking-[0.2em] text-white/60 uppercase">Now Playing</p>
                 <h3 class="text-3xl font-extrabold leading-tight">NAN CHUN</h3>
-                <p class="text-sm font-bold text-[#E50914]">SE SO NEON</p>
+                <p class="text-sm font-bold text-[var(--red)]">SE SO NEON</p>
                 <div class="mt-3 flex flex-wrap gap-2">
                   <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
                   <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
@@ -312,6 +448,20 @@
               <span id="npCurrent" class="text-xs text-white/60 tabular-nums w-10">0:00</span>
               <input id="npSeek" type="range" min="0" max="100" value="0" class="np-range w-full" />
               <span id="npDuration" class="text-xs text-white/60 tabular-nums w-10 text-right">0:00</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                id="npMute"
+                type="button"
+                class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-extrabold hover:bg-white/10 transition"
+                aria-label="Mute"
+              >
+                <i id="npMuteIcon" class="fa-solid fa-volume-high"></i>
+              </button>
+
+              <input id="npVolume" type="range" min="0" max="100" value="70" class="np-range w-full" aria-label="Volume" />
+              <span id="npVolVal" class="text-xs text-white/60 tabular-nums w-10 text-right">70</span>
             </div>
 
             <div class="flex gap-3">
@@ -333,7 +483,7 @@
               </button>
             </div>
 
-            <p id="npStatus" class="text-xs text-[#E50914] font-bold min-h-[16px]"></p>
+            <p id="npStatus" class="text-xs text-[var(--red)] font-bold min-h-[16px]"></p>
           </div>
 
           <div id="yt-nan-player" class="hidden"></div>
@@ -343,7 +493,7 @@
           <div class="p-8">
             <p class="text-xs font-black tracking-[0.25em] text-white/60 uppercase">MY FAVORITE SONG</p>
             <h2 class="text-5xl font-extrabold mt-3 leading-none">NAN CHUN</h2>
-            <p class="text-sm font-extrabold text-[#E50914] mt-3">SE SO NEON</p>
+            <p class="text-sm font-extrabold text-[var(--red)] mt-3">SE SO NEON</p>
 
             <p class="mt-6 text-sm leading-7 text-white/80">
               "This track holds a special place in my playlist. I first heard it covered by an artist I admire.
@@ -373,8 +523,8 @@
     <div class="season-divider"></div>
 
     <div id="season5" class="ending reveal">
-      <h1 style="color: #E50914; font-size: 50px; margin-bottom: 20px;">SEASON 5</h1>
-      <h2 style="color: white; font-size: 30px; margin-bottom: 40px;">Catch Me If You Can</h2>
+      <h1 style="color: var(--red); font-size: 50px; margin-bottom: 20px;">SEASON 5</h1>
+      <h2 style="color: var(--text); font-size: 30px; margin-bottom: 40px;">Catch Me If You Can</h2>
       <p style="margin-bottom: 30px; font-size: 18px;">"The story isn't over yet. Let's create the next episode together."</p>
       <div class="contact-icons">
         <a href="https://github.com/IamUnknownZ" target="_blank"><i class="fa-brands fa-github"></i></a>
@@ -386,6 +536,11 @@
     </div>
 
   </div>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
 
   <script src="script.js"></script>
 </body>

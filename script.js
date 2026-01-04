@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbarScroll();
   initLogoScrollTop();
   initCopyTitle();
+
+  initScrollProgress();
+  initBackToTop();
+
+  initHobbyModal();
+
+  initSeason3Carousel();   // auto-slide + pause + arrows + swipe + counter + preload
+  initHomeLoader();        // wait 3s + preload essential
 });
 
 /* =========================
@@ -76,105 +84,388 @@ function initCopyTitle() {
 }
 
 /* =========================
-   YOUTUBE PLAYERS (Music + Movie Slider)
+   Scroll Progress Bar
 ========================= */
-var player;
-var isPlaying = false;
-var updateInterval;
-var moviePlayers = [];
-var currentMovie = 0;
+function initScrollProgress(){
+  const bar = document.getElementById("scroll-progress");
+  if(!bar) return;
 
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  let ticking = false;
 
-// Global YouTube Ready Function
-window.onYouTubeIframeAPIReady = function() {
-  
-  // 1. Setup Music Player (Season 4)
-  if (document.getElementById('yt-nan-player')) {
-    player = new YT.Player('yt-nan-player', {
-      height: '0', 
-      width: '0',
-      videoId: 'A5ZWtVZafIs', 
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
+  const update = () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    bar.style.width = pct.toFixed(2) + "%";
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  update();
+}
+
+/* =========================
+   Back To Top
+========================= */
+function initBackToTop(){
+  const btn = document.getElementById("backToTop");
+  if(!btn) return;
+
+  const toggle = () => {
+    if(window.scrollY > 600) btn.classList.add("is-show");
+    else btn.classList.remove("is-show");
+  };
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  window.addEventListener("scroll", toggle, { passive: true });
+  toggle();
+}
+
+/* =========================
+   Season 2 — Modal
+========================= */
+function initHobbyModal(){
+  const modal = document.getElementById("hobbyModal");
+  if(!modal) return;
+
+  const titleEl = document.getElementById("hobbyModalTitle");
+  const reasonEl = document.getElementById("hobbyModalReason");
+  const iconEl = document.getElementById("hobbyModalIcon");
+
+  function open({ title, reason, icon }){
+    titleEl.textContent = title || "Hobby";
+    reasonEl.textContent = reason || "";
+    iconEl.innerHTML = `<i class="${icon || "fa-solid fa-star"}"></i>`;
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close(){
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".hobby-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      open({
+        title: btn.dataset.title,
+        reason: btn.dataset.reason,
+        icon: btn.dataset.icon
+      });
+    });
+  });
+
+  modal.addEventListener("click", (e) => {
+    if(e.target && e.target.hasAttribute("data-modal-close")) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape" && !modal.classList.contains("hidden")) close();
+  });
+}
+
+/* =========================
+   Season 3 — Carousel
+   Auto-slide + Pause + Arrows + Swipe + Counter + Preload
+========================= */
+function initSeason3Carousel(){
+  const hero = document.getElementById("movieHero");
+  if(!hero) return;
+
+  const cards = Array.from(hero.querySelectorAll(".card-movie"));
+  const prevBtn = document.getElementById("moviePrev");
+  const nextBtn = document.getElementById("movieNext");
+  const pauseBtn = document.getElementById("moviePause");
+  const pauseIcon = document.getElementById("moviePauseIcon");
+  const pauseText = document.getElementById("moviePauseText");
+  const counter = document.getElementById("movieCounter");
+
+  if(!cards.length) return;
+
+  const AUTO_MS = 6000;
+
+  let index = cards.findIndex(c => c.classList.contains("card-movie--active"));
+  if(index < 0) index = 0;
+
+  let timer = null;
+  let paused = false;
+
+  function fmt(n){ return String(n).padStart(2, "0"); }
+
+  function setCounter(){
+    if(!counter) return;
+    counter.textContent = `${fmt(index+1)} / ${fmt(cards.length)}`;
+  }
+
+  function activate(newIndex){
+    if(newIndex === index) return;
+
+    cards[index].classList.remove("card-movie--active");
+    index = (newIndex + cards.length) % cards.length;
+    cards[index].classList.add("card-movie--active");
+
+    setCounter();
+  }
+
+  function next(){ activate(index + 1); }
+  function prev(){ activate(index - 1); }
+
+  function startAuto(){
+    stopAuto();
+    if(paused) return;
+    timer = setInterval(next, AUTO_MS);
+  }
+
+  function stopAuto(){
+    if(timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function togglePause(){
+    paused = !paused;
+    if(paused){
+      stopAuto();
+      pauseIcon.className = "fa-solid fa-play";
+      pauseText.textContent = "Play";
+      pauseBtn.setAttribute("aria-label", "Resume autoplay");
+    }else{
+      startAuto();
+      pauseIcon.className = "fa-solid fa-pause";
+      pauseText.textContent = "Pause";
+      pauseBtn.setAttribute("aria-label", "Pause autoplay");
+    }
+  }
+
+  prevBtn?.addEventListener("click", () => { prev(); startAuto(); });
+  nextBtn?.addEventListener("click", () => { next(); startAuto(); });
+  pauseBtn?.addEventListener("click", togglePause);
+
+  // swipe
+  let startX = 0, startY = 0, dragging = false;
+
+  hero.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    dragging = true;
+  }, { passive: true });
+
+  hero.addEventListener("touchmove", (e) => {
+    if(!dragging) return;
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30){
+      dragging = false;
+      if(dx < 0) next();
+      else prev();
+      startAuto();
+    }
+  }, { passive: true });
+
+  hero.addEventListener("touchend", () => { dragging = false; }, { passive: true });
+
+  // preload backgrounds
+  const urls = cards.map(c => {
+    const bg = c.style.backgroundImage || "";
+    const m = bg.match(/url\((['"]?)(.*?)\1\)/i);
+    return m && m[2] ? m[2] : null;
+  }).filter(Boolean);
+
+  const preload = (u) => new Promise((res) => {
+    const img = new Image();
+    img.onload = () => res(true);
+    img.onerror = () => res(false);
+    img.src = u;
+  });
+
+  Promise.allSettled(urls.map(preload)).finally(() => {
+    setCounter();
+    startAuto();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if(document.hidden) stopAuto();
+    else startAuto();
+  });
+}
+
+/* =========================
+   HOME LOADER: 3s + preload essential images
+========================= */
+function initHomeLoader(){
+  const MIN_DELAY = 3000;
+  const loader = document.getElementById("home-loader");
+  if(!loader) return;
+
+  const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  function preloadUrl(url){
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url;
     });
   }
 
-  /* =========================
-   SEASON 3: SIMPLE SLIDER (NO TRAILER)
-========================= */
-var currentMovie = 0;
+  function collectEssentialUrls(){
+    const urls = new Set();
 
-$(function () {
-  // Navigation Dots only
-  $('[data-navigation] li').on('click', function () {
-    var newIndex = $(this).index();
-    if (newIndex === currentMovie) return;
+    // season 3 backgrounds
+    document.querySelectorAll("#season3 .card-movie").forEach((el) => {
+      const bg = el.style.backgroundImage || "";
+      const m = bg.match(/url\((['"]?)(.*?)\1\)/i);
+      if(m && m[2]) urls.add(m[2]);
+    });
 
-    currentMovie = newIndex;
+    // dashboard background
+    const dash = document.getElementById("dashboard");
+    if(dash){
+      const bg = dash.style.backgroundImage || "";
+      const m = bg.match(/url\((['"]?)(.*?)\1\)/i);
+      if(m && m[2]) urls.add(m[2]);
+    }
 
-    $('[data-navigation] li')
-      .removeClass('is-active')
-      .eq(newIndex)
-      .addClass('is-active');
+    return [...urls];
+  }
 
-    $('.card-movie')
-      .removeClass('card-movie--active')
-      .eq(newIndex)
-      .addClass('card-movie--active');
-  });
-});
+  async function run(){
+    const urls = collectEssentialUrls();
+    const preloadPromise = Promise.allSettled(urls.map(preloadUrl));
+    const delayPromise = wait(MIN_DELAY);
 
+    await Promise.all([preloadPromise, delayPromise]);
+
+    loader.classList.add("is-hidden");
+    setTimeout(() => loader.remove(), 600);
+  }
+
+  window.addEventListener("load", run, { once:true });
 }
 
-// --- Music Player Logic ---
-function onPlayerReady(event) {
+/* =========================
+   YouTube Music Player (Season 4)
+   + Volume slider + Mute
+========================= */
+let player;
+let isPlaying = false;
+let updateInterval = null;
+
+(function loadYouTubeAPI(){
+  if(!document.getElementById("yt-nan-player")) return;
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+})();
+
+window.onYouTubeIframeAPIReady = function() {
+  if (!document.getElementById("yt-nan-player")) return;
+
+  player = new YT.Player("yt-nan-player", {
+    height: "0",
+    width: "0",
+    videoId: "A5ZWtVZafIs",
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
+};
+
+function onPlayerReady() {
   const btnPlay = document.getElementById("npPlay");
   const btnStop = document.getElementById("npStop");
   const seek = document.getElementById("npSeek");
 
-  btnPlay.addEventListener("click", () => {
+  const vol = document.getElementById("npVolume");
+  const volVal = document.getElementById("npVolVal");
+  const muteBtn = document.getElementById("npMute");
+  const muteIcon = document.getElementById("npMuteIcon");
+
+  if(player && vol){
+    const v = parseInt(vol.value || "70", 10);
+    player.setVolume(Math.max(0, Math.min(100, v)));
+    if(volVal) volVal.textContent = String(v);
+  }
+
+  btnPlay?.addEventListener("click", () => {
     if(!player) return;
     if(isPlaying) player.pauseVideo();
     else player.playVideo();
   });
 
-  btnStop.addEventListener("click", () => {
-    if(player) {
-      player.pauseVideo();
-      player.seekTo(0);
-    }
+  btnStop?.addEventListener("click", () => {
+    if(!player) return;
+    player.pauseVideo();
+    player.seekTo(0, true);
     isPlaying = false;
     updateUI(false);
     stopLoop();
-    seek.value = 0;
-    document.getElementById("npCurrent").innerText = "0:00";
+    if(seek) seek.value = 0;
+    const cur = document.getElementById("npCurrent");
+    if(cur) cur.innerText = "0:00";
   });
 
-  seek.addEventListener("input", function() {
+  seek?.addEventListener("input", function() {
+    if(!player) return;
     const duration = player.getDuration();
-    if (duration) {
+    if(duration){
       const seekTo = duration * (this.value / 100);
       player.seekTo(seekTo, true);
+    }
+  });
+
+  vol?.addEventListener("input", function(){
+    if(!player) return;
+    const v = parseInt(this.value, 10);
+    player.setVolume(v);
+    if(volVal) volVal.textContent = String(v);
+
+    if(player.isMuted && player.isMuted()){
+      player.unMute();
+      if(muteIcon) muteIcon.className = "fa-solid fa-volume-high";
+    }
+  });
+
+  muteBtn?.addEventListener("click", () => {
+    if(!player) return;
+    if(player.isMuted && player.isMuted()){
+      player.unMute();
+      if(muteIcon) muteIcon.className = "fa-solid fa-volume-high";
+    }else{
+      player.mute();
+      if(muteIcon) muteIcon.className = "fa-solid fa-volume-xmark";
     }
   });
 }
 
 function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING) {
+  if (event.data === YT.PlayerState.PLAYING) {
     isPlaying = true;
     updateUI(true);
     startLoop();
-  } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+  } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
     isPlaying = false;
     updateUI(false);
     stopLoop();
-    if(event.data == YT.PlayerState.ENDED) document.getElementById("npSeek").value = 0;
+    if(event.data === YT.PlayerState.ENDED) {
+      const seek = document.getElementById("npSeek");
+      if(seek) seek.value = 0;
+    }
   }
 }
 
@@ -183,6 +474,8 @@ function updateUI(playing) {
   const text = document.getElementById("npPlayText");
   const disc = document.getElementById("npDisc");
   const status = document.getElementById("npStatus");
+
+  if(!icon || !text || !disc || !status) return;
 
   if(playing) {
     icon.className = "fa-solid fa-pause";
@@ -204,15 +497,19 @@ function startLoop() {
     const ct = player.getCurrentTime();
     const dur = player.getDuration();
     if(dur > 0) {
-      document.getElementById("npSeek").value = (ct / dur) * 100;
-      document.getElementById("npCurrent").innerText = fmtTime(ct);
-      document.getElementById("npDuration").innerText = fmtTime(dur);
+      const seek = document.getElementById("npSeek");
+      const cur = document.getElementById("npCurrent");
+      const total = document.getElementById("npDuration");
+      if(seek) seek.value = (ct / dur) * 100;
+      if(cur) cur.innerText = fmtTime(ct);
+      if(total) total.innerText = fmtTime(dur);
     }
   }, 1000);
 }
 
 function stopLoop() {
-  clearInterval(updateInterval);
+  if(updateInterval) clearInterval(updateInterval);
+  updateInterval = null;
 }
 
 function fmtTime(s) {
@@ -220,107 +517,3 @@ function fmtTime(s) {
   const sc = Math.floor(s % 60);
   return m + ":" + (sc < 10 ? "0"+sc : sc);
 }
-
-// --- Movie Slider Logic (jQuery) ---
-$(function() {
-    // Play Trailer Button
-    $('[data-play]').on('click', function() {
-        var $card = $('.card-movie--active');
-        var idx = $card.index();
-        var currentPlayer = moviePlayers[idx];
-
-        if ($card.hasClass('card-movie--playing')) {
-            $(this).removeClass('is-playing');
-            $card.removeClass('card-movie--playing');
-            if(currentPlayer && typeof currentPlayer.pauseVideo === 'function') currentPlayer.pauseVideo();
-        } else {
-            $(this).addClass('is-playing');
-            $card.addClass('card-movie--playing');
-            if(currentPlayer && typeof currentPlayer.playVideo === 'function') currentPlayer.playVideo();
-        }
-    });
-
-
-    /* =========================
-   HOME LOADER: wait 3s + images loaded
-========================= */
-(function () {
-  const MIN_DELAY = 3000;
-
-  function wait(ms) {
-    return new Promise((res) => setTimeout(res, ms));
-  }
-
-  function preloadUrl(url) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve({ url, ok: true });
-      img.onerror = () => resolve({ url, ok: false });
-      img.src = url;
-    });
-  }
-
-  function collectImageUrls() {
-    const urls = new Set();
-
-    // 1) <img src="...">
-    document.querySelectorAll("img").forEach((img) => {
-      if (img.src) urls.add(img.src);
-    });
-
-    // 2) elements with inline background-image: url('...')
-    document.querySelectorAll("[style*='background-image']").forEach((el) => {
-      const bg = el.style.backgroundImage || "";
-      const match = bg.match(/url\((['"]?)(.*?)\1\)/i);
-      if (match && match[2]) urls.add(match[2]);
-    });
-
-    return [...urls];
-  }
-
-  async function runHomeLoader() {
-    const loader = document.getElementById("home-loader");
-    if (!loader) return;
-
-    // start waiting for images + minimum delay
-    const urls = collectImageUrls();
-
-    const imagesPromise = Promise.allSettled(urls.map(preloadUrl));
-    const minDelayPromise = wait(MIN_DELAY);
-
-    await Promise.all([imagesPromise, minDelayPromise]);
-
-    loader.classList.add("is-hidden");
-    setTimeout(() => loader.remove(), 600);
-  }
-
-  // run on home only (if loader exists)
-  window.addEventListener("load", runHomeLoader);
-})();
-
-    // Navigation Dots
-    $('[data-navigation] li').on('click', function() {
-        var newIndex = $(this).index();
-        if(newIndex === currentMovie) return;
-
-        resetMoviePlayer(); // Stop current video
-
-        currentMovie = newIndex;
-        $('[data-navigation] li').removeClass('is-active').eq(newIndex).addClass('is-active');
-        $('.card-movie').removeClass('card-movie--active').eq(newIndex).addClass('card-movie--active');
-    });
-
-    // Helper to stop video inside slider
-    window.resetMoviePlayer = function() {
-        var $card = $('.card-movie--active');
-        var idx = $card.index();
-        var currentPlayer = moviePlayers[idx];
-
-        $card.removeClass('card-movie--playing');
-        $('[data-play]').removeClass('is-playing');
-        
-        if(currentPlayer && typeof currentPlayer.stopVideo === 'function') {
-            currentPlayer.stopVideo(); // Stop trailer
-        }
-    }
-}); 
