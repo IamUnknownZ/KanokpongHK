@@ -1,3 +1,4 @@
+//script.js
 document.addEventListener("DOMContentLoaded", () => {
   // ✅ หน้า Welcome (index.html) รันแค่นี้พอ
   if (document.body.classList.contains("index-body")) {
@@ -280,6 +281,7 @@ function initSeason3Carousel(){
     if(timer) clearInterval(timer);
     timer = null;
   }
+
 
   function togglePause(){
     paused = !paused;
