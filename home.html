@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Boy's Story</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -19,13 +20,12 @@
   <div id="home-loader" class="home-loader">
     <div class="home-loader__inner">
       <div class="home-loader__spinner"></div>
-      <div class="home-loader__text">Loading MOVIES…</div>
+      <div class="home-loader__text">Loading…</div>
     </div>
   </div>
 
   <nav>
     <div class="logo" id="logoTop">KANOKPONG</div>
-
     <ul>
       <li><a href="#season1">ORIGINS</a></li>
       <li><a href="#season2">HOBBIES</a></li>
@@ -35,41 +35,49 @@
     </ul>
   </nav>
 
-  <div id="dashboard" class="fade-in" style="background: url('./img/boy welcome.png') center/cover no-repeat;">
+  <!-- HERO / DASHBOARD -->
+  <header
+    id="dashboard"
+    class="fade-in"
+    style="background: url('./img/boy welcome.png') center/cover no-repeat;"
+  >
     <div class="dashboard-content">
-      <div style="max-width: 600px; padding-top: 60px;">
-        <h1 style="font-size: 80px; font-weight: 800; line-height: 1;">BOY'S<br>STORY</h1>
-        <div style="margin: 20px 0; color: #aaa; font-weight: bold;">
-          <span style="color:#d39b46;">IMDB 6.7</span> &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; 5 Seasons &nbsp;|&nbsp; TV Series &nbsp;|&nbsp; Exciting
+      <div class="hero-inner">
+        <h1 class="hero-title">BOY'S<br>STORY</h1>
+        <div class="hero-meta">
+          <span class="hero-tag">2025</span>
+          <span class="hero-dot">•</span>
+          <span class="hero-tag">5 Seasons</span>
+          <span class="hero-dot">•</span>
+          <span class="hero-tag">TV Series</span>
         </div>
-        <p style="font-size: 18px; margin-bottom: 30px;">
-          A story about a boy who study at KMUTNB in Technological education faculty.
-          He loves coding, movies, and music. Follow his journey as he navigates.
+        <p class="hero-desc">
+        A story about a KMUTNB student who loves coding, movies, and music. 
+        Watch along to get to know him better.
         </p>
         <a href="#header-story" class="btn-play">
           <i class="fa-solid fa-play"></i> Play
         </a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="story-section">
-
-    <div id="header-story">
-      <div class="header-text reveal">
-        <p>Based on a True Story because it's my story.</p>
-        <h1>BOY'S <span>STORY</span></h1>
-        <div style="margin-top: 50px; animation: bounce 2s infinite;">
-          <i class="fa-solid fa-chevron-down" style="font-size: 30px; color: var(--red);"></i>
-        </div>
+  <!-- TITLE SECTION -->
+  <section id="header-story">
+    <div class="header-text reveal">
+      <p>Based on a true story — because it's my story.</p>
+      <h1>BOY'S <span>STORY</span></h1>
+      <div class="header-down">
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
     </div>
+  </section>
 
-    <!-- =======================
-         SEASON 1 — TIMELINE
-         (Expandable / no quote)
-    ======================== -->
-    <div id="season1" class="container">
+  <!-- =======================
+       SEASON 1 — ORIGINS
+  ======================== -->
+  <section id="season1" class="season-block">
+    <div class="container season-box">
       <h1 class="sub-title reveal">Season 1: Origins</h1>
 
       <div class="timeline">
@@ -79,13 +87,11 @@
           <div class="tl-card">
             <details class="tl-details">
               <summary class="tl-summary">
-                <span class="tl-title">Chapter 1: See the world</span>
+                <span class="tl-title">Chapter 1: See the World</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
               <p class="tl-text">
-                "10th October 2005, a boy is born in a big city in Thailand.
-                Little did he know, his journey into the world was about to begin."
+                10th October 2005 — a boy is born in Thailand. A quiet beginning, before the world starts to feel bigger every year.
               </p>
             </details>
           </div>
@@ -96,17 +102,16 @@
           <div class="tl-card">
             <details class="tl-details">
               <summary class="tl-summary">
-                <span class="tl-title">Chapter 2: Hello World</span>
+                <span class="tl-title">Chapter 2: The Learning Years</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
-              <p class="tl-text">
-                The first time I typed “Hello, World” felt like unlocking a secret door.
-                It wasn’t about the code being perfect — it was the feeling that I could
-                create something from nothing. From that day on, I kept learning,
-                experimenting, breaking things, and trying again… because I knew this was
-                the path I wanted.
-              </p>
+              <div class="tl-text">
+                <ul class="tl-list">
+                  <li>Started kindergarten at <b>Christian Borikan Thonburi School</b>.</li>
+                  <li>Then studied primary school at <b>Anurajaprasit School</b>.</li>
+                  <li>Later continued to secondary school at <b>Triam Udom Suksa Pattanakarn Nonthaburi School</b>.</li>
+                </ul>
+              </div>
             </details>
           </div>
         </article>
@@ -116,16 +121,13 @@
           <div class="tl-card">
             <details class="tl-details">
               <summary class="tl-summary">
-                <span class="tl-title">Chapter 3: Graduation 2023</span>
+                <span class="tl-title">Chapter 3: The World Went Quiet</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
-              <p class="tl-text">
-                In 2023, I completed my compulsory education and graduated from
-                Triam Udom Suksa Pattanakarn Nonthaburi School, Science–Computer program.
-                It was a turning point — proof that I could stay consistent, learn under
-                pressure, and keep moving toward the future I wanted in tech.
-              </p>
+              <div class="tl-text">
+                Around 2019, the world changed. Studying from home made life smaller — but curiosity bigger.
+                With more time online, he explored videos, forums, tutorials, and anything that sparked interest in tech and games.
+              </div>
             </details>
           </div>
         </article>
@@ -135,14 +137,13 @@
           <div class="tl-card">
             <details class="tl-details">
               <summary class="tl-summary">
-                <span class="tl-title">Chapter 4: First Real Project</span>
+                <span class="tl-title">Chapter 4: Goodbye, Old Days</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
-              <p class="tl-text">
-                This was the first time I built something that felt real — not just a practice file.
-                I learned how to plan, design, and finish what I started, even when it got messy.
-              </p>
+              <div class="tl-text">
+                He graduated from high school in the <b>Science–Computer</b> program.
+                That path made computer subjects feel less like “schoolwork” and more like a real direction.
+              </div>
             </details>
           </div>
         </article>
@@ -152,14 +153,15 @@
           <div class="tl-card">
             <details class="tl-details">
               <summary class="tl-summary">
-                <span class="tl-title">Chapter 5: Leveling Up</span>
+                <span class="tl-title">Chapter 5: New Campus, New Crew</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
-              <p class="tl-text">
-                I began taking my skills seriously: cleaner code, better structure, and more confidence.
-                Every mistake became a lesson, and every lesson became momentum.
-              </p>
+              <div class="tl-text">
+                The boy isn’t a boy anymore — he became a full-time university student.
+                He enrolled in <b>Computer Education</b>, Faculty of Technical Education,
+                <b>King Mongkut’s University of Technology North Bangkok</b>.
+                New friends, new routines, and new skills — every week feels like leveling up.
+              </div>
             </details>
           </div>
         </article>
@@ -172,28 +174,27 @@
                 <span class="tl-title">Chapter 6: The Next Episode</span>
                 <span class="tl-toggle"><i class="fa-solid fa-angle-down"></i></span>
               </summary>
-
-              <p class="tl-text">
-                The story is still going. New goals, new challenges, and bigger dreams —
-                I’m ready for whatever comes next.
-              </p>
+              <div class="tl-text">
+                The story is still in progress — learning, building, improving, and failing on purpose.
+                The next episode will be bigger, smarter, and more “him”.
+              </div>
             </details>
           </div>
         </article>
 
       </div>
     </div>
+  </section>
 
-    <div class="season-divider"></div>
+  <div class="season-divider" aria-hidden="true"></div>
 
-    <!-- =======================
-         SEASON 2 — HOBBIES
-         (Hover blur+overlay+icon + Modal)
-         (NO Filter/Tags)
-    ======================== -->
-    <div id="season2" class="container">
+  <!-- =======================
+       SEASON 2 — HOBBIES
+  ======================== -->
+  <section id="season2" class="season-block">
+    <div class="container season-box">
       <h1 class="sub-title reveal">Season 2: The Hobbies</h1>
-      <p class="reveal" style="color: var(--muted); margin-bottom:20px;">What keeps me going when I'm not coding.</p>
+      <p class="reveal season-lead">What keeps me going when I’m not studying.</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal">
 
@@ -202,7 +203,7 @@
           class="hobby-card hobby-item"
           data-title="Listening to Music"
           data-icon="fa-solid fa-headphones"
-          data-reason="Music keeps my focus steady. It’s like background energy when I code, and a reset button when my brain is tired."
+          data-reason="Music keeps my focus steady. It’s like background energy when I do something — and a reset button when my brain is tired."
         >
           <img loading="lazy" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200" alt="Listening to Music">
           <div class="hobby-overlay">
@@ -216,7 +217,7 @@
           class="hobby-card hobby-item"
           data-title="Watching Movies"
           data-icon="fa-solid fa-film"
-          data-reason="I love the feeling of being pulled into another world — especially on a big screen. It’s cinematic therapy for me."
+          data-reason="I love the feeling of being pulled into another world. It’s an absolute cinema for me."
         >
           <img loading="lazy" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200" alt="Watching Movies">
           <div class="hobby-overlay">
@@ -230,7 +231,7 @@
           class="hobby-card hobby-item"
           data-title="Exploring Tech"
           data-icon="fa-solid fa-microchip"
-          data-reason="New tech feels like new tools in a game. I like learning what’s possible, then imagining how I can build with it."
+          data-reason="New tech feels like new tools in a game. I like learning what’s possible such as AI or else."
         >
           <img loading="lazy" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200" alt="Exploring Tech">
           <div class="hobby-overlay">
@@ -242,179 +243,178 @@
         <button
           type="button"
           class="hobby-card hobby-item"
-          data-title="Going to Theater"
+          data-title="Going to the Theater"
           data-icon="fa-solid fa-ticket"
           data-reason="Theater nights are my highlight days. The sound, the crowd, the scale — it makes stories feel alive."
         >
-          <img loading="lazy" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200" alt="Going to Theater">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200" alt="Going to the Theater">
           <div class="hobby-overlay">
             <div class="hobby-overlay__icon"><i class="fa-solid fa-ticket"></i></div>
-            <div class="hobby-text">Going to Theater</div>
+            <div class="hobby-text">Going to the Theater</div>
           </div>
         </button>
 
       </div>
     </div>
+  </section>
 
-    <!-- Hobby Modal -->
-    <div id="hobbyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="hobbyModalTitle">
-      <div class="modal__backdrop" data-modal-close></div>
-      <div class="modal__panel" role="document">
-        <button class="modal__close" type="button" aria-label="Close" data-modal-close>
-          <i class="fa-solid fa-xmark"></i>
+  <!-- Hobby Modal -->
+  <div id="hobbyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="hobbyModalTitle">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__panel" role="document">
+      <button class="modal__close" type="button" aria-label="Close" data-modal-close>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal__head">
+        <div class="modal__icon" id="hobbyModalIcon"><i class="fa-solid fa-star"></i></div>
+        <h2 class="modal__title" id="hobbyModalTitle">Title</h2>
+      </div>
+
+      <div class="modal__body">
+        <p class="modal__label">Why I love it</p>
+        <p class="modal__text" id="hobbyModalReason"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="season-divider" aria-hidden="true"></div>
+
+  <!-- =======================
+       SEASON 3 — MOVIES
+  ======================== -->
+  <header class="season-head reveal s3-head" id="season3-head">
+    <h1 class="sub-title s3-title">Season 3: Back to the Theater</h1>
+    <p class="sub-caption s3-caption">These are the movies that hit me the hardest on the big screen.</p>
+  </header>
+
+  <section id="season3" class="container">
+    <div class="card-movie-wrapper reveal" id="movieHero">
+
+      <div class="movie-ui" aria-label="Movie carousel controls">
+        <button id="moviePrev" class="movie-btn movie-btn--prev" type="button" aria-label="Previous movie">
+          <i class="fa-solid fa-chevron-left"></i>
         </button>
 
-        <div class="modal__head">
-          <div class="modal__icon" id="hobbyModalIcon"><i class="fa-solid fa-star"></i></div>
-          <h2 class="modal__title" id="hobbyModalTitle">Title</h2>
-        </div>
-
-        <div class="modal__body">
-          <p class="modal__label">Why I love it</p>
-          <p class="modal__text" id="hobbyModalReason"></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="season-divider"></div>
-
-    <!-- =======================
-         SEASON 3 — MOVIES
-         Auto-slide + Pause + Arrows + Swipe + Counter
-    ======================== -->
-    <header class="season-head reveal s3-head">
-      <h1 class="sub-title s3-title">Season 3: Back to the theater</h1>
-      <p class="sub-caption s3-caption">these are the movies that hit me the hardest on the big screen.</p>
-    </header>
-
-    <div id="season3" class="container">
-      <div class="card-movie-wrapper reveal" id="movieHero">
-
-        <!-- Controls -->
-        <div class="movie-ui" aria-label="Movie carousel controls">
-          <button id="moviePrev" class="movie-btn movie-btn--prev" type="button" aria-label="Previous movie">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-
-          <div class="movie-meta">
-            <span id="movieCounter" class="movie-counter">01 / 05</span>
-            <button id="moviePause" class="movie-pause" type="button" aria-label="Pause autoplay">
-              <i id="moviePauseIcon" class="fa-solid fa-pause"></i>
-              <span id="moviePauseText">Pause</span>
-            </button>
-          </div>
-
-          <button id="movieNext" class="movie-btn movie-btn--next" type="button" aria-label="Next movie">
-            <i class="fa-solid fa-chevron-right"></i>
+        <div class="movie-meta">
+          <span id="movieCounter" class="movie-counter">01 / 05</span>
+          <button id="moviePause" class="movie-pause" type="button" aria-label="Pause autoplay">
+            <i id="moviePauseIcon" class="fa-solid fa-pause"></i>
+            <span id="moviePauseText">Pause</span>
           </button>
         </div>
 
-        <!-- Slides -->
-        <div class="card-movie-carousel">
+        <button id="movieNext" class="movie-btn movie-btn--next" type="button" aria-label="Next movie">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
 
-          <div class="card-movie card-movie--active"
-            style="background-image: url('./img/interstellar-9200x4320-10148.jpg');">
-            <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener">Interstellar</a>
-              <div class="card-movie__details">
-                <span class="card-movie__details-item">2014</span>
-                <span class="card-movie__details-item">169 mins</span>
-                <ul class="card-movie__details-item card-movie__details-list">
-                  <li>Sci-Fi</li><li>Adventure</li><li>Drama</li>
-                </ul>
-              </div>
-              <div class="card-movie__description">
-                <p>Interstellar is the kind of film I want to feel — not just watch. In IMAX, the sound and scale hit different, like the screen pulls you into space for real.</p>
-              </div>
+      <div class="card-movie-carousel">
+
+        <div class="card-movie card-movie--active"
+          style="background-image: url('./img/interstellar-9200x4320-10148.jpg');">
+          <div class="card-movie__content">
+            <a class="card-movie__title" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener">Interstellar</a>
+            <div class="card-movie__details">
+              <span class="card-movie__details-item">2014</span>
+              <span class="card-movie__details-item">169 mins</span>
+              <ul class="card-movie__details-item card-movie__details-list">
+                <li>Sci-Fi</li><li>Adventure</li><li>Drama</li>
+              </ul>
             </div>
-            <div class="card-movie__rating">8.7</div>
-          </div>
-
-          <div class="card-movie"
-            style="background-image: url('./img/dune-part-two-movie-7680x4320-15307.jpg');">
-            <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt1160419/" target="_blank" rel="noopener">Dune</a>
-              <div class="card-movie__details">
-                <span class="card-movie__details-item">2021</span>
-                <span class="card-movie__details-item">155 mins</span>
-                <ul class="card-movie__details-item card-movie__details-list">
-                  <li>Sci-Fi</li><li>Adventure</li><li>Drama</li>
-                </ul>
-              </div>
-              <div class="card-movie__description">
-                <p>Dune feels made for the biggest screen possible. The visuals, the bass, the atmosphere — IMAX is basically my default choice for this kind of experience.</p>
-              </div>
+            <div class="card-movie__description">
+              <p>Interstellar is the kind of film I want to feel — not just watch. The sound and scale make space feel real.</p>
             </div>
-            <div class="card-movie__rating">8.0</div>
           </div>
-
-          <div class="card-movie"
-            style="background-image: url('./img/superman-2025-key-7680x4320-22752.jpg');">
-            <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt5950044/" target="_blank" rel="noopener">Superman</a>
-              <div class="card-movie__details">
-                <span class="card-movie__details-item">2025</span>
-                <span class="card-movie__details-item">135 mins</span>
-                <ul class="card-movie__details-item card-movie__details-list">
-                  <li>Action</li><li>Sci-Fi</li><li>Adventure</li>
-                </ul>
-              </div>
-              <div class="card-movie__description">
-                <p>Clark Kent balances his Kryptonian heritage with his human upbringing in this reboot by James Gunn.</p>
-              </div>
-            </div>
-            <div class="card-movie__rating">TBA</div>
-          </div>
-
-          <div class="card-movie"
-            style="background-image: url('./img/one.png');">
-            <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt30144839/" target="_blank" rel="noopener">One Battle After Another</a>
-              <div class="card-movie__details">
-                <span class="card-movie__details-item">2025</span>
-                <span class="card-movie__details-item">145 mins</span>
-                <ul class="card-movie__details-item card-movie__details-list">
-                  <li>Thriller</li><li>Action</li><li>Drama</li>
-                </ul>
-              </div>
-              <div class="card-movie__description">
-                <p>This one is for the thrill. I like movies that keep my eyes locked on the screen — and in IMAX, every chase and every hit feels way more intense.</p>
-              </div>
-            </div>
-            <div class="card-movie__rating">7.9</div>
-          </div>
-
-          <div class="card-movie"
-            style="background-image: url('./img/oppenheimer-8k-2023-8000x4500-12220.jpg');">
-            <div class="card-movie__content">
-              <a class="card-movie__title" href="https://www.imdb.com/title/tt15398776/" target="_blank" rel="noopener">Oppenheimer</a>
-              <div class="card-movie__details">
-                <span class="card-movie__details-item">2023</span>
-                <span class="card-movie__details-item">180 mins</span>
-                <ul class="card-movie__details-item card-movie__details-list">
-                  <li>Biopic</li><li>Drama</li><li>History</li>
-                </ul>
-              </div>
-              <div class="card-movie__description">
-                <p>Oppenheimer was an IMAX moment for me. The tension, the details, the sound — it’s the kind of film that proves why I still love going to the theater.</p>
-              </div>
-            </div>
-            <div class="card-movie__rating">8.4</div>
-          </div>
-
+          <div class="card-movie__rating">8.7</div>
         </div>
+
+        <div class="card-movie"
+          style="background-image: url('./img/dune-part-two-movie-7680x4320-15307.jpg');">
+          <div class="card-movie__content">
+            <a class="card-movie__title" href="https://www.imdb.com/title/tt1160419/" target="_blank" rel="noopener">Dune</a>
+            <div class="card-movie__details">
+              <span class="card-movie__details-item">2021</span>
+              <span class="card-movie__details-item">155 mins</span>
+              <ul class="card-movie__details-item card-movie__details-list">
+                <li>Sci-Fi</li><li>Adventure</li><li>Drama</li>
+              </ul>
+            </div>
+            <div class="card-movie__description">
+              <p>Dune feels made for a huge screen. The visuals, the atmosphere, the weight of every scene — it’s pure immersion.</p>
+            </div>
+          </div>
+          <div class="card-movie__rating">8.0</div>
+        </div>
+
+        <div class="card-movie"
+          style="background-image: url('./img/superman-2025-key-7680x4320-22752.jpg');">
+          <div class="card-movie__content">
+            <a class="card-movie__title" href="https://www.imdb.com/title/tt5950044/" target="_blank" rel="noopener">Superman</a>
+            <div class="card-movie__details">
+              <span class="card-movie__details-item">2025</span>
+              <span class="card-movie__details-item">135 mins</span>
+              <ul class="card-movie__details-item card-movie__details-list">
+                <li>Action</li><li>Sci-Fi</li><li>Adventure</li>
+              </ul>
+            </div>
+            <div class="card-movie__description">
+              <p>A new take on Clark Kent — balancing his Kryptonian legacy with human life, built with heart and scale.</p>
+            </div>
+          </div>
+          <div class="card-movie__rating">7.1</div>
+        </div>
+
+        <div class="card-movie"
+          style="background-image: url('./img/one.png');">
+          <div class="card-movie__content">
+            <a class="card-movie__title" href="https://www.imdb.com/title/tt30144839/" target="_blank" rel="noopener">One Battle After Another</a>
+            <div class="card-movie__details">
+              <span class="card-movie__details-item">2025</span>
+              <span class="card-movie__details-item">145 mins</span>
+              <ul class="card-movie__details-item card-movie__details-list">
+                <li>Thriller</li><li>Action</li><li>Drama</li>
+              </ul>
+            </div>
+            <div class="card-movie__description">
+              <p>This one is for the thrill. I love movies that keep my eyes locked on the screen — fast, tense, and intense.</p>
+            </div>
+          </div>
+          <div class="card-movie__rating">7.8</div>
+        </div>
+
+        <div class="card-movie"
+          style="background-image: url('./img/oppenheimer-8k-2023-8000x4500-12220.jpg');">
+          <div class="card-movie__content">
+            <a class="card-movie__title" href="https://www.imdb.com/title/tt15398776/" target="_blank" rel="noopener">Oppenheimer</a>
+            <div class="card-movie__details">
+              <span class="card-movie__details-item">2023</span>
+              <span class="card-movie__details-item">180 mins</span>
+              <ul class="card-movie__details-item card-movie__details-list">
+                <li>Biopic</li><li>Drama</li><li>History</li>
+              </ul>
+            </div>
+            <div class="card-movie__description">
+              <p>Tension, detail, and sound design that you feel in your chest. It’s the kind of film that proves why theaters still matter.</p>
+            </div>
+          </div>
+          <div class="card-movie__rating">8.2</div>
+        </div>
+
       </div>
     </div>
+  </section>
 
-    <div class="season-divider"></div>
+  <!-- ✅ บรรทัดคั่น SEASON 3 -> 4 -->
+  <div class="season-divider" aria-hidden="true"></div>
 
-    <!-- =======================
-         SEASON 4 — MUSIC
-         (Volume slider + Mute)
-    ======================== -->
-    <div id="season4" class="container">
-      <h1 class="sub-title reveal">Season 4: Pump up the Volume</h1>
-      <p class="reveal text-white/60 mb-6">One track that matches my mood the most.</p>
+  <!-- =======================
+       SEASON 4 — MUSIC
+  ======================== -->
+  <section id="season4" class="season-block">
+    <div class="container season-box">
+      <h1 class="sub-title reveal">Season 4: Pump Up the Volume</h1>
+      <p class="reveal season-lead">One track that matches my mood the most.</p>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start reveal">
 
@@ -437,10 +437,6 @@
                 <p class="text-xs font-black tracking-[0.2em] text-white/60 uppercase">Now Playing</p>
                 <h3 class="text-3xl font-extrabold leading-tight">NAN CHUN</h3>
                 <p class="text-sm font-bold text-[var(--red)]">SE SO NEON</p>
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Indie</span>
-                  <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-white/5 border border-white/10">Nostalgia</span>
-                </div>
               </div>
             </div>
 
@@ -496,9 +492,8 @@
             <p class="text-sm font-extrabold text-[var(--red)] mt-3">SE SO NEON</p>
 
             <p class="mt-6 text-sm leading-7 text-white/80">
-              "This track holds a special place in my playlist. I first heard it covered by an artist I admire.
-              Even though I don't understand every word, the raw emotion in the raspy vocals hits deep.
-              It captures a specific late-night mood that words just can't explain."
+              This track holds a special place in my playlist. Even when I don’t understand every word,
+              the emotion in the vocals hits deep — like a late-night mood you can’t explain.
             </p>
 
             <div class="mt-7">
@@ -519,23 +514,31 @@
 
       </div>
     </div>
+  </section>
 
-    <div class="season-divider"></div>
+  <div class="season-divider" aria-hidden="true"></div>
 
-    <div id="season5" class="ending reveal">
-      <h1 style="color: var(--red); font-size: 50px; margin-bottom: 20px;">SEASON 5</h1>
-      <h2 style="color: var(--text); font-size: 30px; margin-bottom: 40px;">Catch Me If You Can</h2>
-      <p style="margin-bottom: 30px; font-size: 18px;">"The story isn't over yet. Let's create the next episode together."</p>
+  <!-- =======================
+       SEASON 5 — FOOTER
+  ======================== -->
+  <footer id="season5" class="ending reveal">
+    <div class="ending-inner">
+      <h1 class="ending-kicker">SEASON 5</h1>
+      <h2 class="ending-title">Catch Me If You Can</h2>
+      <p class="ending-quote">“The story isn't over yet. Let's create the next episode together.”</p>
+
       <div class="contact-icons">
-        <a href="https://github.com/IamUnknownZ" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://github.com/IamUnknownZ" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i>
+        </a>
       </div>
-      <p style="margin-top: 50px; font-size: 12px; opacity: 0.5;">
+
+      <p class="ending-credit">
         © 2025 Kanokpong Huakham. All rights reserved.<br>
         Directed by Kanokpong. Produced by Coffee.
       </p>
     </div>
-
-  </div>
+  </footer>
 
   <!-- Back to top -->
   <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">

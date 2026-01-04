@@ -1,10 +1,3 @@
-/* =========================================
-   style.css — OPTIMIZED (NO Theme/Accent, NO Filters, NO Quote)
-   - Removed duplicates / conflicting overrides
-   - Kept: S1 timeline clean spacing (dot not cover date)
-   - Kept: S3 hero + UI always visible (arrows/pause/counter) + arrow icon centered
-========================================= */
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 :root{
@@ -22,21 +15,19 @@ body{ background: var(--bg); color: var(--text); overflow-x:hidden; }
 /* Helpers */
 .hidden{ display:none !important; }
 .fade-in{ animation: fadeIn 1.2s ease-in forwards; }
-.fade-out{ opacity:0; transition: opacity .8s ease; pointer-events:none; }
+.fade-out{ opacity:0; transition: opacity .45s ease; pointer-events:none; }
 @keyframes fadeIn{ from{ opacity:0; transform:scale(1.02); } to{ opacity:1; transform:scale(1); } }
-.reveal{ opacity:0; transform: translateY(50px); transition: all 1s ease; }
+
+.reveal{ opacity:0; transform: translateY(40px); transition: all 0.9s ease; }
 .reveal.active{ opacity:1; transform: translateY(0); }
 
 /* =========================================
-   NETFLIX WELCOME (INDEX PAGE)
-   - Intro Zoomout
-   - Profile Gate
+   WELCOME (index.html) — Netflix style
 ========================================= */
-
 .index-body{
   background: var(--bg);
   min-height: 100vh;
-  overflow: hidden; /* กัน scroll ระหว่าง intro */
+  overflow: hidden;
 }
 
 /* Intro Overlay */
@@ -47,127 +38,141 @@ body{ background: var(--bg); color: var(--text); overflow-x:hidden; }
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999999; /* ให้อยู่บนสุด */
+  z-index: 999999;
+  opacity: 1;
+  transition: opacity .55s ease;
+}
+.intro.is-hide{
+  opacity: 0;
+  pointer-events: none;
 }
 
+/* Netflix-like zoom out */
 @keyframes netflix-intro-zoomout{
-  0%{ opacity:0; transform: scale(.5); }
-  15%{ opacity:1; transform: scale(1); }
-  65%{ opacity:1; transform: scale(1); }
-  100%{ opacity:0; transform: scale(20); }
+  0%   { opacity: 0; transform: scale(.6); }
+  15%  { opacity: 1; transform: scale(1); }
+  70%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(18); }
 }
-
 .netflix-logo-anim{
   color: var(--red);
-  font-family: "Arial Black", sans-serif;
-  font-size: 60px;
+  font-family: "Arial Black", system-ui, sans-serif;
+  font-size: clamp(44px, 6vw, 70px);
   letter-spacing: 2px;
+  text-transform: uppercase;
   animation: netflix-intro-zoomout 3s ease-in-out forwards;
 }
 
 /* Profile Gate */
 .profile-gate{
   min-height: 100vh;
-  display: flex;
+  display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  animation: fadeIn 1s ease-in;
+  gap: 28px;
+  padding: 24px;
 }
-
 .profile-title{
-  font-size: 3.5rem;
+  font-size: clamp(28px, 4.5vw, 56px);
   font-weight: 500;
-  margin-bottom: 10px;
+  color: #fff;
 }
-
 .profiles{
-  display: flex;
-  gap: 30px;
+  display:flex;
+  gap: 28px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
+/* Profile Card */
 .profile-card{
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: .3s ease;
-  display: flex;
+  display:flex;
   flex-direction: column;
   align-items: center;
+  transition: transform .25s ease;
 }
-
+.profile-card:focus-visible{
+  outline: 3px solid rgba(229,9,20,.55);
+  outline-offset: 6px;
+  border-radius: 10px;
+}
 .img-wrapper{
   width: 160px;
   height: 160px;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   border: 3px solid transparent;
-  transition: all 0.3s ease;
-  margin-bottom: 15px;
+  transition: transform .25s ease, border-color .25s ease;
+  margin-bottom: 14px;
+  background: #111;
 }
-
 .profile-card img{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.85);
-  transition: 0.3s ease;
+  filter: brightness(.85);
+  transition: filter .25s ease, transform .25s ease;
 }
-
+.profile-card span{
+  color: #808080;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .25s ease, font-weight .25s ease;
+}
+.profile-card:hover{ transform: translateY(-2px); }
 .profile-card:hover .img-wrapper{
   border-color: #fff;
   transform: scale(1.05);
 }
-
 .profile-card:hover img{
   filter: brightness(1);
+  transform: scale(1.02);
 }
-
-.profile-card span{
-  color: #808080;
-  font-size: 1.3rem;
-  font-weight: 400;
-  transition: 0.3s;
-}
-
 .profile-card:hover span{
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
 }
-
-/* Responsive for index */
 @media (max-width: 768px){
-  .netflix-logo-anim{ font-size: 44px; }
-  .profile-title{ font-size: 2.2rem; }
   .img-wrapper{ width: 130px; height: 130px; }
   .profile-card span{ font-size: 1.05rem; }
 }
 
-/* =========================================
+/* =========================
    NAVBAR
-========================================= */
+========================= */
 nav{
   display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
   padding: 18px 5%;
   position:fixed; top:0; width:100%;
   z-index:9999;
-  transition: background .3s ease, box-shadow .3s ease;
+  transition: background .25s ease, box-shadow .25s ease;
   background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
   backdrop-filter: blur(6px);
 }
-nav.scrolled{ background: rgba(20,20,20,.95); box-shadow: 0 2px 14px rgba(0,0,0,.55); }
-.logo{ color: var(--red); font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor:pointer; }
-
+nav.scrolled{
+  background: rgba(20,20,20,.95);
+  box-shadow: 0 2px 14px rgba(0,0,0,.55);
+}
+.logo{
+  color: var(--red);
+  font-size: 30px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor:pointer;
+}
 nav ul li{ display:inline-block; list-style:none; margin: 10px 12px; }
 nav ul li a{
   color: rgba(255,255,255,.7);
   text-decoration:none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   position:relative;
-  transition: .25s ease;
+  transition: .2s ease;
 }
 nav ul li a:hover{ color:#fff; }
 nav ul li a::after{
@@ -178,13 +183,13 @@ nav ul li a::after{
   position:absolute;
   left:0;
   bottom:-6px;
-  transition: .35s ease;
+  transition: .25s ease;
 }
 nav ul li a:hover::after{ width:100%; }
 
-/* =========================================
-   SECTIONS (GENERAL)
-========================================= */
+/* =========================
+   HERO / DASHBOARD
+========================= */
 #dashboard{ width:100%; height:100vh; position:relative; padding-top: 70px; }
 .dashboard-content{
   width:100%; height:100%;
@@ -193,21 +198,48 @@ nav ul li a:hover::after{ width:100%; }
   display:flex;
   align-items:center;
 }
+.hero-inner{ max-width: 620px; padding-top: 60px; }
+.hero-title{
+  font-size: clamp(44px, 6vw, 86px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -1px;
+}
+.hero-meta{
+  margin: 18px 0 10px;
+  color: rgba(255,255,255,.65);
+  font-weight: 800;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.hero-tag{ font-size: 14px; }
+.hero-dot{ opacity:.5; }
+.hero-desc{
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 26px;
+}
 .btn-play{
   text-decoration:none;
   background:#fff;
   color:#000;
-  padding: 15px 30px;
-  font-size: 20px;
+  padding: 14px 26px;
+  font-size: 18px;
   font-weight: 900;
-  border-radius: 6px;
+  border-radius: 10px;
   display:inline-flex;
   align-items:center;
   gap:10px;
-  transition: .2s ease;
+  transition: .18s ease;
 }
 .btn-play:hover{ filter: brightness(.92); transform: translateY(-1px); }
 
+/* =========================
+   HEADER STORY
+========================= */
 #header-story{
   width:100%;
   min-height: 55vh;
@@ -216,130 +248,119 @@ nav ul li a:hover::after{ width:100%; }
   align-items:center;
   justify-content:center;
   text-align:center;
+  padding: 40px 16px;
 }
 #header-story .header-text p{
   font-family: "Georgia", serif;
   color: var(--muted);
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 13px;
+  margin-bottom: 8px;
 }
 .header-text h1{
   font-family: "Georgia","Times New Roman",serif;
   font-weight: 900;
   text-transform: uppercase;
   color: var(--red);
-  font-size: 80px;
+  font-size: clamp(44px, 6vw, 88px);
   letter-spacing: -2px;
   line-height: 1;
-  margin-top: 10px;
 }
+.header-down{
+  margin-top: 42px;
+  animation: bounce 2s infinite;
+}
+.header-down i{ font-size: 28px; color: var(--red); }
 @keyframes bounce{ 0%, 100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
 
-.container{ padding: 80px 10%; margin: 0 auto; max-width: 1200px; }
+/* =========================
+   SEASON STRUCTURE
+========================= */
+.season-block{ width: 100%; padding: 80px 0; }
+.container{ padding: 0 10%; margin: 0 auto; max-width: 1200px; }
+.season-box{
+  background: linear-gradient(to bottom, rgba(255,255,255,.035), rgba(255,255,255,.015));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 22px;
+  padding: 56px 56px;
+  box-shadow: 0 40px 90px rgba(0,0,0,.55);
+}
 .sub-title{
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 34px;
+  font-weight: 900;
   color: var(--text);
-  margin-bottom: 30px;
+  margin-bottom: 22px;
   border-left: 5px solid var(--red);
   padding-left: 15px;
 }
+.season-lead{ color: var(--muted); margin-bottom: 22px; font-weight: 700; }
+
 .season-divider{
   width:100%;
   height:1px;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,.22), transparent);
-  margin: 60px 0;
-  opacity:.6;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.20), transparent);
+  opacity:.7;
 }
 
-/* =========================================
-   SEASON 1 — TIMELINE (CINEMATIC + NO OVERLAP)
-========================================= */
+/* =========================
+   SEASON 1 — TIMELINE
+========================= */
 #season1 .timeline{
   position: relative;
-  max-width: 1040px;
+  max-width: 980px;
   margin: 0 auto;
-  padding-left: 78px; /* กันเส้น+dot ไม่ชนการ์ด */
+  padding-left: 72px;
 }
-
 #season1 .timeline::before{
   content:"";
   position:absolute;
-  left: 34px;
-  top: 14px;
-  bottom: 14px;
+  left: 32px;
+  top: 12px;
+  bottom: 12px;
   width: 2px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,.06),
-    rgba(255,255,255,.18),
-    rgba(255,255,255,.06)
-  );
+  background: linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,.18), rgba(255,255,255,.06));
 }
-
-#season1 .tl-item{
-  position: relative;
-  padding: 0 0 16px 0; /* ช่องไฟระหว่างรายการ */
-}
-
+#season1 .tl-item{ position: relative; padding: 0 0 14px 0; }
 #season1 .tl-dot{
   position:absolute;
-  left: 24px;
-  top: 24px;
-  width: 16px;
-  height: 16px;
+  left: 22px;
+  top: 26px;
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
   background: rgba(0,0,0,.5);
   border: 2px solid var(--red);
   box-shadow: 0 0 0 7px rgba(229,9,20,.10);
 }
-
 #season1 .tl-card{
-  margin-left: 24px; /* กันชน dot */
+  margin-left: 22px;
   background: linear-gradient(to right, rgba(255,255,255,.06), rgba(255,255,255,.02));
   border: 1px solid rgba(255,255,255,.10);
   border-radius: 16px;
   padding: 16px 18px;
-  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
 }
-
 #season1 .tl-card:hover{
   transform: translateY(-3px);
   border-color: rgba(255,255,255,.16);
   background: linear-gradient(to right, rgba(255,255,255,.08), rgba(255,255,255,.03));
 }
-
-#season1 .tl-details summary{ list-style: none; cursor: pointer; }
+#season1 .tl-details summary{ list-style:none; cursor:pointer; }
 #season1 .tl-details summary::-webkit-details-marker{ display:none; }
-
 #season1 .tl-summary{
   display:flex;
   align-items:center;
-  gap: 16px;
-  min-height: 56px;
+  justify-content:space-between;
+  gap: 14px;
+  min-height: 54px;
 }
-
-#season1 .tl-date{
-  min-width: 150px;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-  opacity: .9;
-}
-
 #season1 .tl-title{
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
-  color: var(--text);
-  flex:1;
   letter-spacing: -0.2px;
+  flex: 1;
 }
-
 #season1 .tl-toggle{
   width: 40px;
   height: 40px;
@@ -349,44 +370,41 @@ nav ul li a:hover::after{ width:100%; }
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.12);
 }
-
 #season1 .tl-details[open] .tl-toggle i{ transform: rotate(180deg); }
-
 #season1 .tl-text{
-  margin-top: 14px;
+  margin-top: 12px;
   color: rgba(255,255,255,.78);
   line-height: 1.85;
   font-size: 15px;
 }
+#season1 .tl-list{
+  margin-left: 18px;
+  line-height: 1.9;
+  color: rgba(255,255,255,.82);
+}
+#season1 .tl-list li{ margin: 6px 0; }
 
-/* =========================================
-   SEASON 2 — HOBBIES (HOVER + MODAL)
-========================================= */
+/* =========================
+   SEASON 2 — HOBBIES
+========================= */
 .hobby-card{
   position:relative;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow:hidden;
   cursor:pointer;
   height: 190px;
   border: 1px solid rgba(255,255,255,.10);
   background: #000;
-  transition: transform .2s ease, border-color .2s ease;
+  transition: transform .18s ease, border-color .18s ease;
 }
-.hobby-card:hover{
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,.18);
-}
+.hobby-card:hover{ transform: translateY(-3px); border-color: rgba(255,255,255,.18); }
 .hobby-card img{
   width:100%;
   height:100%;
   object-fit:cover;
   transition: transform .35s ease, filter .35s ease;
 }
-.hobby-card:hover img{
-  transform: scale(1.06);
-  filter: blur(2px) brightness(.78);
-}
-
+.hobby-card:hover img{ transform: scale(1.06); filter: blur(2px) brightness(.78); }
 .hobby-overlay{
   position:absolute;
   inset:0;
@@ -396,10 +414,9 @@ nav ul li a:hover::after{ width:100%; }
   padding: 14px;
   background: radial-gradient(circle at 20% 15%, rgba(255,255,255,.08), rgba(0,0,0,.75) 55%, rgba(0,0,0,.92));
   opacity: 0.92;
-  transition: opacity .25s ease;
+  transition: opacity .2s ease;
 }
 .hobby-card:hover .hobby-overlay{ opacity: 1; }
-
 .hobby-overlay__icon{
   position:absolute;
   top: 14px;
@@ -463,12 +480,7 @@ nav ul li a:hover::after{ width:100%; }
   color:#fff;
   cursor:pointer;
 }
-.modal__head{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-  padding-right: 50px;
-}
+.modal__head{ display:flex; align-items:center; gap: 14px; padding-right: 50px; }
 .modal__icon{
   width: 54px;
   height: 54px;
@@ -489,18 +501,12 @@ nav ul li a:hover::after{ width:100%; }
   font-size: 12px;
   color: var(--muted);
 }
-.modal__text{
-  margin-top: 10px;
-  line-height: 1.75;
-  font-size: 15px;
-  color: rgba(255,255,255,.84);
-}
+.modal__text{ margin-top: 10px; line-height: 1.75; font-size: 15px; color: rgba(255,255,255,.84); }
 
-/* =========================================
+/* =========================
    SEASON 3 — HEADER
-========================================= */
-.season-head{ max-width: 1200px; margin: 0 auto; padding: 0 10%; }
-.s3-head{ padding-top: 20px; padding-bottom: 18px; text-align:center; }
+========================= */
+.season-head{ max-width: 1200px; margin: 0 auto; padding: 70px 10% 20px; text-align:center; }
 .s3-title{ margin:0 !important; border-left:0 !important; padding-left:0 !important; }
 .s3-caption{ margin:10px 0 0 !important; color: var(--muted); font-size:16px; line-height:1.6; }
 .s3-head::after{
@@ -513,51 +519,34 @@ nav ul li a:hover::after{ width:100%; }
   margin: 16px auto 0;
 }
 
-/* =========================================
-   SEASON 3 — MOVIES (FULL BLEED HERO + UI ALWAYS VISIBLE)
-========================================= */
-
-/* full-bleed season3 without breaking anchor under fixed nav */
+/* =========================
+   SEASON 3 — FULL BLEED HERO + UI
+========================= */
 #season3{
   scroll-margin-top: var(--navH);
   padding-top: var(--navH);
   margin-top: calc(var(--navH) * -1);
-}
-#season3.container{
   max-width:none !important;
   width:100% !important;
   padding-left:0 !important;
   padding-right:0 !important;
   padding-bottom:0 !important;
 }
-
-/* wrapper becomes viewport hero */
 #season3 .card-movie-wrapper{
   position: relative;
-  width:100% !important;
-  max-width:none !important;
-  height: calc(100vh - var(--navH)) !important;
-  min-height: calc(100vh - var(--navH)) !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
+  width:100%;
+  height: calc(100vh - var(--navH));
+  min-height: calc(100vh - var(--navH));
+  border-radius:0;
   overflow: hidden;
   background:#000;
-  margin: 0 !important;
 }
-
-/* disable old dots in season3 */
-#season3 .card-movie-navigation,
-#season3 [data-navigation]{ display:none !important; }
-
-/* carousel layer */
 #season3 .card-movie-carousel{
   position:absolute;
   inset:0;
   z-index: 1;
   overflow:hidden;
 }
-
-/* slides */
 #season3 .card-movie{
   position:absolute;
   inset:0;
@@ -573,8 +562,6 @@ nav ul li a:hover::after{ width:100%; }
   transform: scale(1);
   z-index: 3;
 }
-
-/* overlay readability (never blocks clicks) */
 #season3 .card-movie::before{
   content:"";
   position:absolute;
@@ -583,13 +570,11 @@ nav ul li a:hover::after{ width:100%; }
   z-index: 1;
   pointer-events:none;
 }
-
-/* content above overlay */
 #season3 .card-movie__content{
   position:absolute;
   top: 100px;
   left: 50px;
-  max-width: 400px;
+  max-width: 420px;
   color:#fff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.8);
   z-index: 4;
@@ -599,38 +584,39 @@ nav ul li a:hover::after{ width:100%; }
   text-decoration:none;
   color:#fff;
   cursor:pointer;
-  font-size: 50px;
+  font-size: clamp(34px, 4vw, 56px);
   font-weight: 900;
   line-height: 1;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-transform: uppercase;
   transition: color .25s ease, text-shadow .25s ease;
 }
-#season3 .card-movie__title:hover{
-  color: var(--red);
-  text-shadow: 2px 2px 0px #fff;
-}
-#season3 .card-movie__details{ margin-bottom: 20px; font-weight: 700; }
-#season3 .card-movie__details-item{ display:inline-block; margin-right: 20px; }
+#season3 .card-movie__title:hover{ color: var(--red); text-shadow: 2px 2px 0px #fff; }
+#season3 .card-movie__details{ margin-bottom: 18px; font-weight: 800; color: rgba(255,255,255,.9); }
+#season3 .card-movie__details-item{ display:inline-block; margin-right: 16px; }
 #season3 .card-movie__details-list{ display:inline-block; list-style:none; padding:0; }
-#season3 .card-movie__details-list li{ display:inline-block; margin-right:5px; padding-right:6px; border-right:1px solid rgba(255,255,255,.5); }
+#season3 .card-movie__details-list li{
+  display:inline-block;
+  margin-right:5px;
+  padding-right:6px;
+  border-right:1px solid rgba(255,255,255,.5);
+}
 #season3 .card-movie__details-list li:last-child{ border:none; }
-#season3 .card-movie__description{ font-size: 14px; line-height: 1.6; }
-
+#season3 .card-movie__description{ font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.85); }
 #season3 .card-movie__rating{
   position:absolute;
   bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 3px solid var(--red);
   display:flex;
   align-items:center;
   justify-content:center;
   font-size: 20px;
   font-weight: 900;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.65);
   color:#fff;
   z-index: 4;
 }
@@ -640,10 +626,8 @@ nav ul li a:hover::after{ width:100%; }
   position:absolute;
   inset:0;
   z-index: 10;
-  pointer-events:none; /* allow slide link area to work unless on buttons */
+  pointer-events:none;
 }
-
-/* arrows */
 #season3 .movie-btn{
   pointer-events:auto;
   position:absolute;
@@ -652,19 +636,12 @@ nav ul li a:hover::after{ width:100%; }
   width: 56px;
   height: 56px;
   border-radius: 999px;
-
   display:inline-flex;
   align-items:center;
   justify-content:center;
-
-  padding:0;
-  line-height:1;
-
   background: rgba(0,0,0,.45);
   border: 1px solid rgba(255,255,255,.20);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-
   color:#fff;
   cursor:pointer;
   transition: transform .15s ease, background .15s ease, border-color .15s ease;
@@ -676,16 +653,8 @@ nav ul li a:hover::after{ width:100%; }
 }
 #season3 .movie-btn--prev{ left: 18px; }
 #season3 .movie-btn--next{ right: 18px; }
+#season3 .movie-btn i{ display:block; line-height:1; font-size:18px; }
 
-/* icon center fix */
-#season3 .movie-btn i,
-#season3 .movie-btn svg{
-  display:block;
-  line-height:1;
-  font-size:18px;
-}
-
-/* meta: counter + pause */
 #season3 .movie-meta{
   pointer-events:auto;
   position:absolute;
@@ -695,7 +664,6 @@ nav ul li a:hover::after{ width:100%; }
   align-items:center;
   gap: 10px;
 }
-
 #season3 .movie-counter,
 #season3 .movie-pause{
   font-weight: 900;
@@ -707,7 +675,6 @@ nav ul li a:hover::after{ width:100%; }
   border: 1px solid rgba(255,255,255,.22);
   color:#fff;
 }
-
 #season3 .movie-pause{
   display:inline-flex;
   align-items:center;
@@ -717,27 +684,39 @@ nav ul li a:hover::after{ width:100%; }
 }
 #season3 .movie-pause:hover{ background: rgba(0,0,0,.70); }
 
-/* =========================================
-   FOOTER
-========================================= */
+/* =========================
+   FOOTER (FULL SCREEN)
+========================= */
 .ending{
-  text-align:center;
-  padding: 100px 0;
-  background:#000;
-  color: rgba(255,255,255,.5);
-  border-top: 1px solid rgba(255,255,255,.12);
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 0 8%;
+  border-top: 1px solid rgba(255,255,255,.10);
 }
-.contact-icons i{ font-size: 40px; margin: 0 20px; cursor:pointer; transition:.25s; }
-.contact-icons i:hover{ color: var(--red); transform: scale(1.15); }
+.ending-inner{ width: min(920px, 100%); text-align:center; }
+.ending-kicker{
+  color: var(--red);
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.ending-title{ margin-top: 10px; font-size: clamp(24px, 2.6vw, 38px); font-weight: 900; }
+.ending-quote{ margin-top: 20px; font-size: 16px; line-height: 1.8; color: rgba(255,255,255,.70); }
+.contact-icons{ margin-top: 26px; }
+.contact-icons i{ font-size: 44px; cursor:pointer; transition:.22s ease; color: rgba(255,255,255,.75); }
+.contact-icons i:hover{ color: var(--red); transform: scale(1.12); }
+.ending-credit{ margin-top: 36px; font-size: 12px; opacity: .55; line-height: 1.6; }
 
-/* =========================================
-   MUSIC (SEASON 4)
-========================================= */
-@keyframes spin { to { transform: rotate(360deg); } }
-.spin-slow { animation: spin 4s linear infinite; }
-
+/* =========================
+   MUSIC RANGE
+========================= */
 .np-range{
   -webkit-appearance:none;
+  appearance:none;
   height:6px;
   background:rgba(255,255,255,.2);
   border-radius:99px;
@@ -746,6 +725,7 @@ nav ul li a:hover::after{ width:100%; }
 }
 .np-range::-webkit-slider-thumb{
   -webkit-appearance:none;
+  appearance:none;
   width:14px;
   height:14px;
   background:#fff;
@@ -753,9 +733,18 @@ nav ul li a:hover::after{ width:100%; }
   cursor:pointer;
 }
 
-/* =========================================
-   HOME LOADER
-========================================= */
+/* ✅ Disc spin (Season 4) */
+@keyframes spin{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+}
+.spin-slow{
+  animation: spin 4s linear infinite;
+}
+
+/* =========================
+   LOADER
+========================= */
 .home-loader{
   position: fixed;
   inset: 0;
@@ -786,9 +775,9 @@ nav ul li a:hover::after{ width:100%; }
 }
 @keyframes loaderSpin{ to { transform: rotate(360deg); } }
 
-/* =========================================
+/* =========================
    SCROLL PROGRESS + BACK TO TOP
-========================================= */
+========================= */
 .scroll-progress{
   position: fixed;
   top: 0;
@@ -827,24 +816,20 @@ nav ul li a:hover::after{ width:100%; }
   pointer-events: auto;
 }
 
-/* =========================================
+/* =========================
    RESPONSIVE
-========================================= */
+========================= */
 @media (max-width: 768px){
-  .container{ padding: 70px 16px; }
-  .header-text h1{ font-size:50px; }
+  .container{ padding: 0 16px; }
+  .season-box{ padding: 26px 18px; border-radius: 18px; }
 
-  /* S1 timeline mobile */
-  #season1 .timeline{ padding-left: 70px; }
-  #season1 .timeline::before{ left: 30px; }
-  #season1 .tl-dot{ left: 20px; top: 22px; }
-  #season1 .tl-card{ margin-left: 20px; padding: 14px 14px; }
-  #season1 .tl-summary{ min-height: 54px; gap: 12px; }
-  #season1 .tl-date{ min-width: 118px; font-size: 11px; }
+  #season1 .timeline{ padding-left: 62px; }
+  #season1 .timeline::before{ left: 28px; }
+  #season1 .tl-dot{ left: 18px; top: 24px; }
+  #season1 .tl-card{ margin-left: 18px; padding: 14px 14px; }
   #season1 .tl-title{ font-size: 16px; }
   #season1 .tl-toggle{ width: 38px; height: 38px; }
 
-  /* S3 UI */
   #season3 .movie-btn{ width: 50px; height: 50px; }
   #season3 .movie-btn--prev{ left: 12px; }
   #season3 .movie-btn--next{ right: 12px; }
@@ -856,5 +841,11 @@ nav ul li a:hover::after{ width:100%; }
     right: 16px;
     max-width: none;
   }
-  #season3 .card-movie__title{ font-size: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior: auto !important; }
+  .reveal{ transition: none !important; transform: none !important; opacity: 1 !important; }
+  .fade-in{ animation: none !important; }
+  .netflix-logo-anim{ animation: none !important; }
 }
