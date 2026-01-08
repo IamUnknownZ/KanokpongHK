@@ -5,7 +5,7 @@
 
   ## ✨ Welcome to my little vibe coding project.
 
-  <p>This project is crafted with passion and a bit of digital magic.</p>
+  <p>This project makes you to know more about me.</p>
 
   ---
 
