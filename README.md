@@ -1,9 +1,4 @@
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=00b4d8&height=200&section=header&text=Vibe%20Coding%20Project&fontSize=50&animation=fadeIn" width="100%" />
-
-  <br/>
-
-  ## ✨ Welcome to my little vibe coding project.
+  ## ✨ Welcome to my Frontend project.
 
   <p>This project makes you to know more about me.</p>
 
